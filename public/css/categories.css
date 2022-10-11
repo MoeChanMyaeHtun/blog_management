@@ -1,0 +1,15 @@
+.sec-index{
+    margin-top: 80px;
+}
+.sec-index .create-box{
+    margin-bottom: 30px;
+}
+
+.sec-index .create-input{
+    width: 300px;
+    padding: 5px 10px;
+}
+.sec-index .create-box .create-btn{
+    padding: 5px 10px;
+}
+
