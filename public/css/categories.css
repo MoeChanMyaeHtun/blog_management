@@ -2,14 +2,73 @@
     margin-top: 80px;
 }
 .sec-index .create-box{
-    margin-bottom: 30px;
+  width: 500px;
+  margin:0 auto;
+    border:1px solid #000000;
 }
 
 .sec-index .create-input{
-    width: 300px;
+    width: 340px;
     padding: 5px 10px;
+    float: left;
+    outline: none;
 }
 .sec-index .create-box .create-btn{
-    padding: 5px 10px;
+    padding: 5px 0;
+    float: left;
+    width: 146px;
 }
 
+
+.category-index{
+    width: 1200px;
+    text-align: center;
+    border: 1px solid gray;
+
+}
+.category-index .cat-ttl{
+    background-color: #6e918b;
+    color: #ffffff;
+}
+.category-index tr th,td{
+    padding: 10px 0;
+}
+.category-index tr th{
+    font-size: 24px;
+}
+.category-index tr:hover {
+    /* background-color: gray; */
+    border-bottom: 1px solid #6e918b ;
+}
+.category-index .name{
+width: 300px;
+}
+.category-index .action{
+width: 250px;
+}
+.create-btn1{
+    float: right;
+    margin:0 20px 20px 0;
+    background-color: blue;
+    padding: 4px 20px;
+    border-radius: 5px;
+}
+  .create-btn1:hover{
+    background-color: #ffffff;
+    border: 1px solid blue;
+}
+  .create-btn1 a{
+    color: #ffffff;
+}
+ .create-btn1 a:hover{
+    color: blue;
+}
+.back{
+
+    padding: 10px 10px;
+    background-color:#6e918b ;
+}
+.back-link
+{
+    float: right;
+}

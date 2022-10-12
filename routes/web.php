@@ -31,3 +31,4 @@ Route::post('/categories/create',[CategoriesController::class, 'store'])->name('
 Route::delete('/categories/delete/{id}',[CategoriesController::class, 'delete'])->name('categories.delete');
 Route::get('/categories/show/{id}',[CategoriesController::class, 'show'])->name('categories.show');
 Route::get('/categories/edit/{id}', [CategoriesController::class, 'edit'])->name('categories.edit');
+Route::post('/categories/edit/{id}',[CategoriesController::class, 'update'])->name('categories.update');

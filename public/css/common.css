@@ -1,6 +1,75 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 .inner{
     max-width: 1200px;
     width: 98%;
     margin: 0 auto;
 }
+.feedback{
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875em;
+    color: #dc3545;
+}
+.clearfix::after{
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  a{
+    text-decoration: none !important;
+    display: inline-block;
+  }
+  .btn-div{
+    width: 100px;
+    margin: 0 auto;
+  }
+.edit-btn{
+    float: left;
+    border-color: rgba(0, 0, 255,0.6);
+    padding: 4px;
+    background-color: rgba(0, 0, 255,0.6);
+
+}
+.edit-btn:hover{
+    background-color: #ffffff;
+    border-color:rgba(0, 0, 255,0.6);
+    ;
+}
+.edit{
+    text-decoration: none;
+    color: #ffffff;
+}
+.edit:hover{
+color:rgba(0, 0, 255,0.6);
+
+}
+.del-form{
+    float: left;
+
+}
+.del-btn{
+    border-color: rgba(255, 0, 0,0.6);
+    margin-left: 20px;
+    padding: 4px 6px;
+
+}
+.del-btn:hover{
+    background-color: rgba(255, 0, 0,0.6);
+
+}
+.del{
+    text-decoration: none;
+    color: red;
+}
+.del:hover{
+    color:#ffffff
+}
+
+
 
