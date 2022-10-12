@@ -1,7 +1,11 @@
 <?php
 
+
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoriesController;
 
 /*
@@ -29,6 +33,12 @@ Route::get('/categories', [CategoriesController::class, 'index'])->name('categor
 Route::get('/categories/create',[CategoriesController::class, 'create'])->name('categories.create');
 Route::post('/categories/create',[CategoriesController::class, 'store'])->name('categories.store');
 Route::delete('/categories/delete/{id}',[CategoriesController::class, 'delete'])->name('categories.delete');
-Route::get('/categories/show/{id}',[CategoriesController::class, 'show'])->name('categories.show');
 Route::get('/categories/edit/{id}', [CategoriesController::class, 'edit'])->name('categories.edit');
 Route::post('/categories/edit/{id}',[CategoriesController::class, 'update'])->name('categories.update');
+
+//profile
+
+Route::get('/profile',[ProfileController::class,'index'])->name('profile.index');
+Route::get('/profile/edit/{id}',[ProfileController::class,'edit'])->name('profile.edit');
+Route::post('/profile/edit/{id}',[ProfileController::class,'update'])->name('profile.update');
+Route::delete('/profile/delete/{id}',[ProfileController::class, 'delete'])->name('profile.delete');

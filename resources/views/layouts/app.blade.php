@@ -44,10 +44,10 @@
                             <a href="{{ route('categories.index') }}" class="nav-link">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Post</a>
+                            <a href="#" class="nav-link">Product</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Profile</a>
+                            <a href="{{ route('profile.index') }}" class="nav-link">Profile</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest

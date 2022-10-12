@@ -1,0 +1,31 @@
+.profile-index{
+    width: 1380px;
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid gray;
+}
+.profile-index .profile-ttl{
+    background-color: #6e918b;
+    color: #ffffff;
+}
+.profile-index tr th,td{
+    padding: 10px 0;
+}
+.profile-index tr th{
+    font-size: 24px;
+}
+.profile-index tr:hover {
+    border-bottom: 1px solid #6e918b ;
+}
+.profile-index .name{
+width:200px;
+}
+.profile-index .action{
+width: 180px;
+}
+.profile-index .update{
+    width: 250px;
+}
+.profile-index .email{
+    width: 250px;
+}
