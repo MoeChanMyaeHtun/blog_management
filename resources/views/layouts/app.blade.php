@@ -44,7 +44,7 @@
                             <a href="{{ route('categories.index') }}" class="nav-link">Category</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Product</a>
+                            <a href="{{ route('products.index') }}" class="nav-link">Product</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('profile.index') }}" class="nav-link">Profile</a>
@@ -91,5 +91,15 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        @if(session('status'))
+        let alert_msg = "<?php echo session('status'); ?>";
+        toastr.success(alert_msg, 'SUCCESS', {
+            closeButton: true,
+            progressBar: true,
+        });
+        @endif
+      </script>
+      @stack('js')
 </body>
 </html>

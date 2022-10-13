@@ -1,0 +1,29 @@
+.pc-form
+{
+    width: 500px;
+    margin:10px auto;
+    border: 1px solid #6e918b;
+}
+.pc-box{
+    margin: 20px 33px;
+}
+.title{
+    width: 100%;
+    outline: none;
+    padding: 5px 5px;
+    border:1px solid #6e918b;
+    border-radius: 5px;
+}
+
+.pc-btn{
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px 0;
+    outline: none;
+    border:1px solid #6e918b;
+}
+.pc-btn:hover{
+    color: white;
+    background-color: #6e918b;
+}
+

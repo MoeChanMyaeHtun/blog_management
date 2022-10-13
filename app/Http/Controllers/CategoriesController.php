@@ -25,7 +25,7 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => 'required',
         ]);
-        $category = new category;
+        $category = new Category;
 
         $category->name = $request['name'];
         $category->save();

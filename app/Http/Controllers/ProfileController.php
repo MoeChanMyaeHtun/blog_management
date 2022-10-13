@@ -18,7 +18,13 @@ class ProfileController extends Controller
     }
     public function edit($id){
         $profile = User::find($id);
-        return view('profile.edit', compact('profile'));
+        // return view('profile.edit', compact('profile'));
+        if($profile->id == auth()->user()->id){
+            return view('profile.edit', compact('profile'));
+        }
+        else{
+            return back()->with('error', 'Unauthorize');
+        }
     }
     public function update(Request $request,$id){
         $request -> validate([
@@ -33,12 +39,19 @@ class ProfileController extends Controller
        $profile ->phone = $request['phone'];
        $profile ->address = $request['address'];
        $profile -> save();
-        return redirect('/categories')->with('success','profile update successfully .');
+        return redirect('/profile')->with('success','profile update successfully .');
     }
     public function delete($id){
        $profile = User::find($id);
-       $profile -> delete();
-        return back()->with('success','profile delete successfully .');
+    //    $profile -> delete();
+    //     return back()->with('success','profile delete successfully .');
+    if($profile->id == auth()->user()->id) {
+        $profile->delete();
+        return back();
+        } else {
+        return back()->with('error', 'Unauthorize');
+        }
+
     }
 
 }

@@ -29,3 +29,32 @@ width: 180px;
 .profile-index .email{
     width: 250px;
 }
+.profile-box{
+    border:1px solid #6e918b;
+    width: 500px;
+    margin: 0 auto;
+}
+.profile-input{
+    width: 450px;
+    margin: 10px auto;
+    padding: 5px;
+    outline: none;
+}
+.profile-btn{
+    width: 450px;
+    margin: 10px auto;
+    padding: 5px;
+    outline: none;
+}
+.profile-btn1{
+    width: 450px;
+    margin: 10px auto;
+    padding: 5px;
+}
+.profile-btn1:hover{
+    color: #ffffff;
+    background-color: #6e918b;
+    border: 1px solid #6e918b;
+}
+
+

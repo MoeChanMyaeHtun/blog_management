@@ -5,6 +5,8 @@
 @section('content')
     <section class="sec-index">
         <div class="inner">
+            <div class="index-box">
+                <h1 class="cmn-ttl">Categories</h1>
             <div class="create-btn1">
                 <a href="{{ route('categories.create') }}">Create</a>
             </div>
@@ -45,7 +47,7 @@
             {{ $categories->links() }}
             @include('flash-message')
 
-
+        </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
