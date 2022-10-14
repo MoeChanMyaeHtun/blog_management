@@ -1,30 +1,60 @@
 @extends('../layouts/app')
+<link rel="stylesheet" href="{{asset('css/product.css')}}">
 @section('content')
 <section class="product-index">
     <div class="inner">
-        <table class="category-index">
+        <h1 class="cmn-ttl">Product</h1>
+
+        <div class="clearfix">
+            <div class="srch_wrpr">
+                <input type="checkbox" name="" class="checkbox">
+                <div class="srch_sb_cnt">
+                    <input type="text" name="text_bar" id="" class="sech_txt_inpt" placeholder="Type to search...">
+                    <button class="srch_btn">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        <div class="create-btn1">
+            <a href="{{ route('products.create') }}">Create</a>
+        </div>
+    </div>
+        <table class="product-index">
             <tr class="cat-ttl">
-                <th>No</th>
+                <th class="no">No</th>
+                <th class="name">User</th>
                 <th class="name">Title</th>
-                <th>Created_at</th>
-                <th>Updated_at</th>
-                <th class="action">Action</th>
+                <th class="name">Category</th>
+                <th class="name">Description</th>
+                <th class="name">Price</th>
+                <th class="name">Updated_at</th>
+                <th class="name">Action</th>
             </tr>
 
             @foreach ($products as $product)
                 <tr>
 
-                    <td>{{ ++$i }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $product->user_id = auth()->user()->name }}</td>
                     <td>{{ $product->title }}</td>
-                    <td>{{ $product->created_at }}</td>
+                    <td>
+                        @foreach ($product->categories as $category){{ $category->name }}
+                                @endforeach
+                    </td>
+                    <td>{{ $product->description}}</td>
+                    <td>{{ $product->price }}</td>
                     <td>{{ $product->updated_at }}</td>
                     <td>
                         <div class="btn-div clearfix">
-                            <button class="edit-btn"><a href="{{ route('categories.edit', $product->id) }}"
-                                    class="edit">
+                            <a href="{{ route('products.show',$product->id) }}"
+                                    class="show show-btn">
+                                    Info
+                                </a>
+                           <a href="{{ route('products.edit', $product->id) }}"
+                                    class="edit edit-btn">
                                     Edit
-                                </a></button>
-                            <form class="del-form " action="{{ route('categories.delete', $product->id) }}"
+                                </a>
+                            <form class="del-form " action="{{ route('products.delete', $product->id) }}"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -36,6 +66,7 @@
                 </tr>
             @endforeach
         </table>
+        {{ $products->links() }}
     </div>
 </section>
 @endsection

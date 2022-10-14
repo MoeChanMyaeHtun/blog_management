@@ -1,81 +1,118 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-  }
-.inner{
+}
+
+.inner {
     max-width: 1400px;
     width: 98%;
     margin: 0 auto;
 }
-.feedback{
+
+.feedback {
     display: block;
     width: 100%;
     margin-top: 0.25rem;
     font-size: 0.875em;
     color: #dc3545;
 }
-.clearfix::after{
+
+.clearfix::after {
     content: "";
     clear: both;
     display: table;
-  }
+}
 
-  a{
+a {
     text-decoration: none !important;
     display: inline-block;
-  }
-  .btn-div{
-    width: 100px;
+}
+
+.btn-div {
+    width: 150px;
     margin: 0 auto;
-  }
-.edit-btn{
+}
+
+.edit-btn {
     float: left;
-    border-color: rgba(0, 0, 255,0.6);
-    padding: 4px;
-    background-color: rgba(0, 0, 255,0.6);
+    border-color: #81bb9d;
+    padding: 5px;
+    background-color: rgba(129, 187, 157, 0.3);
+    border: 1px solid #81bb9d;
+}
+
+.edit-btn:hover {
+    background-color: #81bb9d;
+    border-color: #81bb9d;
 
 }
-.edit-btn:hover{
-    background-color: #ffffff;
-    border-color:rgba(0, 0, 255,0.6);
-    ;
-}
-.edit{
+
+.edit {
     text-decoration: none;
     color: #ffffff;
 }
-.edit:hover{
-color:rgba(0, 0, 255,0.6);
+
+.edit:hover {
+    color: #ffffff;
 
 }
-.del-form{
+
+.del-form {
     float: left;
 
 }
-.del-btn{
-    border-color: rgba(255, 0, 0,0.6);
+
+.del-btn {
+    border-color: rgba(255, 0, 0, 0.3);
     margin-left: 5px;
     padding: 4px 6px;
+    background-color: rgba(255, 0, 0, 0.3);
+    color: #ffffff;
 
 }
-.del-btn:hover{
-    background-color: rgba(255, 0, 0,0.6);
+
+.del-btn:hover {
+    background-color: rgb(255, 0, 0);
 
 }
-.del{
+
+.del {
     text-decoration: none;
     color: red;
 }
-.del:hover{
-    color:#ffffff
+
+.del:hover {
+    color: #ffffff
 }
-.cmn-ttl{
+
+.cmn-ttl {
     font-size: 36px;
-    color: #6e918b;
+    color: #5e7c77;
     font-weight: 600;
     text-align: center;
-    margin-bottom:50px;
+    margin-bottom: 50px;
 }
 
+.show-btn {
+    float: left;
+    border:1px solid rgba(0, 0, 255, 0.3);
+    padding: 5px;
+    background-color: rgba(0, 0, 255, 0.3);
+    margin-right: 5px;
+}
 
+.show-btn:hover {
+    border-color: rgb(0, 0, 255);
+    background-color: rgb(0, 0, 255);
+    color: #ffffff;
+}
+
+.show {
+    text-decoration: none;
+    color: rgba(0, 0, 255, 0.6);
+}
+
+.show:hover {
+    color: #ffffff;
+}

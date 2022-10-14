@@ -22,16 +22,16 @@
                 @foreach ($categories as $category)
                     <tr>
 
-                        <td>{{ ++$i }}</td>
+                        <td>{{  $loop->iteration}}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->created_at }}</td>
                         <td>{{ $category->updated_at }}</td>
                         <td>
                             <div class="btn-div clearfix">
-                                <button class="edit-btn"><a href="{{ route('categories.edit', $category->id) }}"
-                                        class="edit">
+                                <a href="{{ route('categories.edit', $category->id) }}"
+                                        class="edit edit-btn">
                                         Edit
-                                    </a></button>
+                                    </a>
                                 <form class="del-form " action="{{ route('categories.delete', $category->id) }}"
                                     method="POST">
                                     @csrf

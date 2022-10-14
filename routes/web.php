@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
+
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\CategoriesController;
 
@@ -52,6 +53,9 @@ Route::delete('/profile/delete/{id}',[ProfileController::class, 'delete'])->name
 Route::get('/products',[ProductsController::class,'index'])->name('products.index');
 Route::get('/products/create',[ProductsController::class,'create'])->name('products.create');
 Route::post('/products/create',[ProductsController::class,'store'])->name('products.store');
+Route::get('/products/show/{id}',[ProductsController::class, 'show'])->name('products.show');
 Route::get('/products/edit/{id}',[ProductsController::class,'edit'])->name('products.edit');
 Route::post('/products/edit/{id}',[ProductsController::class,'update'])->name('products.update');
 Route::delete('/products/delete/{id}',[ProductsController::class, 'delete'])->name('products.delete');
+Route::get('/products', [ProductsController::class, 'search'])->name('products.search');
+

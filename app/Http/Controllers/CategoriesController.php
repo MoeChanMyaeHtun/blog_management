@@ -11,8 +11,8 @@ class CategoriesController extends Controller
 {
     public function index(Request $request)
     {
-        $categories = Category::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->paginate(5);
-        $i = ($request->input('page', 1) - 1) * 5;
+        $categories = Category::orderBy('id', 'DESC')->paginate(5);
+
         return view('categories.index', compact('categories','i'));
 
     }
@@ -29,10 +29,12 @@ class CategoriesController extends Controller
 
         $category->name = $request['name'];
         $category->save();
+
         return redirect('/categories');
     }
     public function edit($id){
         $category = Category::find($id);
+
         return view('categories.edit', compact('category'));
     }
     public function update(Request $request,$id){
@@ -42,11 +44,13 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         $category ->name = $request['name'];
         $category -> save();
+
         return redirect('/categories')->with('success','Category update successfully .');
     }
     public function delete($id){
         $category = Category::find($id);
         $category -> delete();
+        
         return back()->with('success','Category delete successfully .');
     }
 
