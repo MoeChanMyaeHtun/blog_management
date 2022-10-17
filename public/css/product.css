@@ -30,7 +30,7 @@
 }
 
 .product-index {
-    width: 1380px;
+    width: 1200px;
     margin: 0 auto;
     text-align: center;
 }
@@ -149,7 +149,7 @@ td {
 
 .sech_txt_inpt:focus {
     letter-spacing: 2px;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .sech_txt_inpt:focus,
@@ -240,4 +240,37 @@ input.checkbox:checked~.srch_sb_cnt .srch_btn:after {
     transition: all .6s cubic-bezier(0.000, 0.105, 0.035, 1.570);
     transition-delay: 0.5s;
     color: #5e7c77;
+}
+
+
+.detail-box{
+    width: 600px;
+    margin: 50px auto;
+}
+
+.detail-ttl{
+    background-color: #6e918b;
+    padding: 20px 0;
+}
+.detail-ttl .cmn-ttl{
+    color: #ffffff;
+    margin-bottom: 0;
+}
+.detail-box1{
+    background-color:rgba(110, 145, 139,0.3) ;
+}
+.detail-box1 .l{
+    float: left;
+    width: 200px;
+    padding-left: 10px;
+    /* font-size: 18px; */
+}
+
+.detail-box1 .r{
+    float: right;
+    width: 300px;
+    font-size: 18px;
+}
+.detail-box1 ul li{
+padding: 20px 0;
 }

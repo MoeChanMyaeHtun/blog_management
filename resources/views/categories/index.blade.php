@@ -1,5 +1,5 @@
-@extends('../layouts/app')
-
+@extends('../admin/index')
+<link rel="stylesheet" href="{{asset('css/categories.css')}}">
 
 
 @section('content')

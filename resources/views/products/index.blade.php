@@ -1,4 +1,4 @@
-@extends('../layouts/app')
+@extends('../admin/index')
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
 @section('content')
 <section class="product-index">
@@ -7,14 +7,19 @@
 
         <div class="clearfix">
             <div class="srch_wrpr">
-                <input type="checkbox" name="" class="checkbox">
+                <form action="" >
+
+                <input type="checkbox" name="title" class="checkbox">
                 <div class="srch_sb_cnt">
-                    <input type="text" name="text_bar" id="" class="sech_txt_inpt" placeholder="Type to search...">
+                    <input type="text" name="title" id="" class="sech_txt_inpt" placeholder="Type to search...">
                     <button class="srch_btn">
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <i class="fa fa-search" ></i>
                     </button>
+
+                </form>
                 </div>
             </div>
+
         <div class="create-btn1">
             <a href="{{ route('products.create') }}">Create</a>
         </div>
@@ -66,7 +71,11 @@
                 </tr>
             @endforeach
         </table>
-        {{ $products->links() }}
+        {{-- {{ $products->links() }} --}}
+        {{ $products->appends(request()->input())->links() }}
+
+
+
     </div>
 </section>
 @endsection

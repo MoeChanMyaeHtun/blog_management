@@ -28,7 +28,9 @@ a {
     text-decoration: none !important;
     display: inline-block;
 }
-
+ul{
+    list-style: none;
+}
 .btn-div {
     width: 150px;
     margin: 0 auto;

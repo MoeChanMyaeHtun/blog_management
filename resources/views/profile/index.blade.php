@@ -1,4 +1,4 @@
-@extends('../layouts/app')
+@extends('../admin/index')
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @section('content')
 <section class="sec-index">
