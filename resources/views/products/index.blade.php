@@ -19,7 +19,9 @@
                 </form>
                 </div>
             </div>
-
+            {{-- <div class="create-btn">
+                <form action=""></form>
+            </div> --}}
         <div class="create-btn1">
             <a href="{{ route('products.create') }}">Create</a>
         </div>

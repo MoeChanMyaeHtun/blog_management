@@ -1,9 +1,13 @@
 <?php
 namespace App\Http\Controllers;
 
+
+
+use App\Mail\NotiMail;
 use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 
@@ -121,9 +125,23 @@ class ProductsController extends Controller
      */
     public function delete($id){
         $product = Products::find($id);
+
+
+
+        // if (Mail::failures()) {
+        //      return response()->Fail('Sorry! Please try again latter');
+        // }else{
+        //      return response()->success('Great! Successfully send in your mail');
+        //    }
+        if($product){
         $product->categories()->detach();
         $product -> delete();
-        return back()->with('success','product delete successfully .');
+        }
+        Mail::to('scm.myattheingiaung@gmail.com')->send(new NotiMail());
+
+           return redirect('/products')->with('success','product delete successfully .');
     }
 
 }
+
+

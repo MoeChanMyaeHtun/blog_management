@@ -10,7 +10,9 @@ use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,10 @@ Route::get('/products/show/{id}',[ProductsController::class, 'show'])->name('pro
 Route::get('/products/edit/{id}',[ProductsController::class,'edit'])->name('products.edit');
 Route::post('/products/edit/{id}',[ProductsController::class,'update'])->name('products.update');
 Route::delete('/products/delete/{id}',[ProductsController::class, 'delete'])->name('products.delete');
+Route::get('products/mail', [ProductController::class, 'index']);
 
 //admin
 Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+
+
+

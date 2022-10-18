@@ -1,4 +1,4 @@
-@extends('../layouts/app')
+@extends('../admin/index')
 <link rel="stylesheet" href="{{ asset('css/product.css') }}">
 @section('content')
     <h1 class="cmn-ttl">Product Edit</h1>

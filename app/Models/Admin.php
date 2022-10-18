@@ -15,5 +15,9 @@ class Admin extends Model
         'address',
         'password',
     ];
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 
 }

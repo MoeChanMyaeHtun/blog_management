@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use App\Models\Admin;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,14 +20,18 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         //Admin
-        // Admin::create([
-        //         'name'=>'Admin',
-        //         'email'=>'admin@gmail.com',
-        //         'phone'=>'09987456123',
-        //         'address'=>'Mdy',
-        //         'password'=>'admin1234',
 
-        // ]);
+        $admins=[
+                'name'=>'Admin',
+                'email'=>'admin@gmail.com',
+                'phone'=>'09987456123',
+                'address'=>'Mdy',
+              'password' => Hash::make('admin'),
+
+        ];
+        foreach ($admins as $key => $admin) {
+            Admin::create($admin);
+        }
         //category
         Category::create([
 
