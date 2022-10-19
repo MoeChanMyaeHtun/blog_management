@@ -4,7 +4,7 @@
     <section class="product-create">
         <div class="inner">
 
-                <form action="{{ route('products.store') }}"  class="pc-form" method="POST">
+                <form action="{{ route('product.store') }}"  class="pc-form" method="POST">
                 @csrf
 
                 <div class="pc-box">

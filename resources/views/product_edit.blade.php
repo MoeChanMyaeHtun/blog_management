@@ -1,16 +1,16 @@
-@extends('../admin/index')
+@extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/product.css') }}">
 @section('content')
     <h1 class="cmn-ttl">Product Edit</h1>
 
     <div class="inner">
 
-        <form action="{{ route('products.update', $product->id) }}" class="pcreate-box clearfix" method="POST">
+        <form action="{{ route('product.update', $product->id) }}" class="pcreate-box clearfix" method="POST">
             @csrf
-
+            
             <div class="back clearfix">
-                <a href="{{ route('products.index') }}" class="back-link"><i class="fa fa-sign-out"
-                        style="font-size:24px;color:#ffffff"></i></a>
+                {{-- <a href="{{ route('products.index') }}" class="back-link"><i class="fa fa-sign-out"
+                        style="font-size:24px;color:#ffffff"></i></a> --}}
             </div>
             <div class="pcreate-input-box">
                 <input type="text" name="title" class="pcreate-input" placeholder="Enter your title"
@@ -25,7 +25,7 @@
             </div>
 
             <div class="pcreate-input-box">
-                <select class="form-select" multiple aria-label="multiple select " name="category[]">
+                <select class="form-select" multiple aria-label="multiple select example" name="category[]">
 
                     @foreach ($product->categories as $category)
                         {{ $cate[] = $category->pivot->category_id }}

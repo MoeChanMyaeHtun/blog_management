@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\User;
 use App\Mail\NotiMail;
 use App\Models\Category;
 use App\Models\Products;
@@ -24,67 +25,18 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
 
-        // if ($request['title']) {
-        //     $products=Products::where('title','LIKE','%'.$request->title.'%');
-        // }
-        // else{
-        //     $products = Products::orderBy('id', 'DESC')->paginate(3);
-        // }
 
         if($request['title']!= null){
             $products = Products::where('title','LIKE','%'.$request->title.'%')->paginate(5);
         }else{
             $products = Products::orderBy('id','desc')->paginate(5);
         }
+        $i = ($request->input('page', 1) - 1) * 5;
 
-        return view('products.index', compact('products'));
+        return view('admin.products.index', compact('products','i'));
 
     }
 
-     /**
-     * To show create product view
-     *
-     * @return View create product
-     */
-    public function create(){
-        $categories  = Category::all();
-
-        return view('products.create',compact('categories'));
-    }
-
-    /**
-     * To store product information
-     *
-     * @return View index product
-     */
-
-    public function store(ProductStoreRequest $request){
-        $validated = $request->validated();
-        $product = new Products;
-        $product->user_id = auth()->user()->id;
-        $product->title = $request['title'];
-        $product->description = $request['description'];
-        $product->price = $request['price'];
-
-        $product->save();
-        foreach($request['category'] as $cat_id ){
-            $category = Category::find($cat_id);
-        $product->categories()->attach($category);
-        }
-        return redirect('/products');
-    }
-    /**
-     * To show product detail information
-     *
-     * @return View detail page
-     */
-    public function show($id)
-    {
-        $categories  = Category::all();
-        $product = Products::find($id);
-
-        return view('products.show',compact('product','categories'));
-    }
 
      /**
      * To show product edit page
@@ -94,7 +46,22 @@ class ProductsController extends Controller
     public function edit($id){
         $categories  = Category::all();
         $product = Products::find($id);
-        return view('products.edit', compact('product','categories'));
+
+        return view('admin.products.edit', compact('product','categories'));
+    }
+
+          /**
+     * To show product detail information
+     *
+     * @return View detail page
+     */
+    public function show($id)
+    {
+        $categories  = Category::all();
+        $product = Products::find($id);
+        $user = User::all();
+
+        return view('admin.products.show',compact('product','categories'));
     }
 
     /**

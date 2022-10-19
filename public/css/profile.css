@@ -33,6 +33,7 @@ width: 180px;
     border:1px solid #6e918b;
     width: 500px;
     margin: 0 auto;
+    border-radius: 5px;
 }
 .profile-input{
     width: 450px;
@@ -50,11 +51,17 @@ width: 180px;
     width: 450px;
     margin: 10px auto;
     padding: 5px;
+    background-color: rgba(0, 123, 255,0.8);
+    outline: none;
+    border: 1px solid rgba(0, 123, 255,0.8);
+    color: #ffffff;
 }
 .profile-btn1:hover{
-    color: #ffffff;
-    background-color: #6e918b;
-    border: 1px solid #6e918b;
+
+    background-color: #007bff;
+    border: 1px solid #007bff;
 }
 
-
+.pedit{
+    float: left;
+}

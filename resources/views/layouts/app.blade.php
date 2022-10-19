@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{asset('css/reset.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{asset('css/common.css')}}">
-    
+
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -34,22 +34,16 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
 
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+
                         <li class="nav-item">
-                            <a href="{{ route('categories.index') }}" class="nav-link">Category</a>
+                            <a href="{{ route('product') }}" class="nav-link">Product</a>
+
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ route('products.index') }}" class="nav-link">Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('profile.index') }}" class="nav-link">Profile</a>
-                        </li>
-                        <!-- Authentication Links -->
+
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

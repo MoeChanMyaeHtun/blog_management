@@ -13,14 +13,14 @@ class ProfileController extends Controller
     {
         $profiles = User::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->paginate(5);
         $i = ($request->input('page', 1) - 1) * 5;
-        return view('profile.index', compact('profiles','i'));
+        return view('admin.profile.index', compact('profiles','i'));
 
     }
     public function edit($id){
         $profile = User::find($id);
         // return view('profile.edit', compact('profile'));
         if($profile->id == auth()->user()->id){
-            return view('profile.edit', compact('profile'));
+            return view('admin.profile.edit', compact('profile'));
         }
         else{
             return back()->with('error', 'Unauthorize');
@@ -43,8 +43,6 @@ class ProfileController extends Controller
     }
     public function delete($id){
        $profile = User::find($id);
-    //    $profile -> delete();
-    //     return back()->with('success','profile delete successfully .');
     if($profile->id == auth()->user()->id) {
         $profile->delete();
         return back();

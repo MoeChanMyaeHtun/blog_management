@@ -9,7 +9,11 @@
             @csrf
 
             <div class="back clearfix">
-                <a href="{{ route('categories.index') }}" class="back-link"><i class="fa fa-sign-out" style="font-size:24px;color:#ffffff"></i></a>
+                <h2 class="cmn-ttl2 pedit">Categories create</h2>
+                <a href="{{ route('profile.index') }}" class="back-link">
+
+                    <i class="fa-solid fa-arrow-left" style="font-size:24px;color:#ffffff"></i>
+                </a>
             </div>
             <div class="create-input">
                 <input type="text" name="name" class="create-input" placeholder="Enter your category" @error('name') is-invalid @enderror  autocomplete="name" autofocus>

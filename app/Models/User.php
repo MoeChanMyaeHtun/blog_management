@@ -44,11 +44,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    // protected function type(): Attribute
-    // {
-    //     return new Attribute(
-    //         get: fn ($value) =>  [ "admin"][$value],
-    //     );
-    // }
+
+    public function product()
+    {
+        return $this->hasMany(Products::class);
+    }
 
 }

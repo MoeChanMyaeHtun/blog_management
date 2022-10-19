@@ -32,7 +32,7 @@ ul{
     list-style: none;
 }
 .btn-div {
-    width: 150px;
+    width: 90px;
     margin: 0 auto;
 }
 
@@ -90,7 +90,7 @@ ul{
 
 .cmn-ttl {
     font-size: 36px;
-    color: #5e7c77;
+    color: #007bff;
     font-weight: 600;
     text-align: center;
     margin-bottom: 50px;
@@ -117,4 +117,12 @@ ul{
 
 .show:hover {
     color: #ffffff;
+}
+.cmn-ttl2{
+    color: #ffffff;
+    font-size: 24px;
+
+}
+.pedit{
+    float: left;
 }

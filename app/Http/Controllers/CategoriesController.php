@@ -20,8 +20,9 @@ class CategoriesController extends Controller
     public function index(Request $request)
     {
         $categories = Category::orderBy('id', 'DESC')->paginate(5);
+        $i = ($request->input('page', 1) - 1) * 5;
 
-        return view('categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories','i'));
     }
 
     /**
@@ -31,7 +32,7 @@ class CategoriesController extends Controller
      */
     public function create(){
         info("hello");
-        return view('categories.create');
+        return view('admin.categories.create');
     }
 
     /**
@@ -57,7 +58,7 @@ class CategoriesController extends Controller
     public function edit($id){
         $category = Category::find($id);
 
-        return view('categories.edit', compact('category'));
+        return view('admin.categories.edit', compact('category'));
     }
 
 

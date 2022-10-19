@@ -3,11 +3,11 @@
 @section('content')
     <div class="inner">
         <div class="detail-box">
-            <div class="detail-ttl">
+            <div class="detail-ttl ">
                 <h1 class="cmn-ttl">Product Detail</h1>
             </div>
             <div class="detail-box1">
-                <ul >
+                <ul class="detail-list">
                     <li class="clearfix">
                         <div class="l"><h3>User</h3> </div>
 
@@ -32,5 +32,6 @@
                 </ul>
             </div>
         </div>
+        
     </div>
 @endsection

@@ -1,4 +1,4 @@
-@extends('../layouts/app')
+@extends('../admin/index')
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 
 
@@ -8,7 +8,11 @@
            <form action="{{ route('profile.update',$profile->id) }}" class="profile-box clearfix" method="POST">
             @csrf
             <div class="back clearfix">
-                <a href="{{ route('profile.index') }}" class="back-link"><i class="fa fa-sign-out" style="font-size:24px;color:#ffffff"></i></a>
+                <h2 class="cmn-ttl2 pedit">Profile Edit</h2>
+                <a href="{{ route('profile.index') }}" class="back-link">
+
+                    <i class="fa-solid fa-arrow-left" style="font-size:24px;color:#ffffff"></i>
+                </a>
             </div>
 
 

@@ -6,13 +6,11 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-
-
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\frontend\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +33,21 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//product
+Route::get('/product',[ProductController::class, 'index'])->name('product');
+Route::get('/product/show/{id}',[ProductController::class, 'show'])->name('product.detail');
+Route::get('/product/edit/{id}',[ProductController::class,'edit'])->name('product.edit');
+Route::post('/product/edit/{id}',[ProductController::class,'update'])->name('product.update');
+Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
+Route::post('/product/create',[ProductController::class,'store'])->name('product.store');
+// Route::get('products/mail', [ProductController::class, 'index']);
+
+
+
+//admin
+Route::prefix('admin')->group(function () {
+Route::get('/',[AdminController::class,'index'])->name('admin.index');
+
 // category
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
 Route::get('/categories/create',[CategoriesController::class, 'create'])->name('categories.create');
@@ -54,16 +67,9 @@ Route::delete('/profile/delete/{id}',[ProfileController::class, 'delete'])->name
 //products
 
 Route::get('/products',[ProductsController::class,'index'])->name('products.index');
-Route::get('/products/create',[ProductsController::class,'create'])->name('products.create');
-Route::post('/products/create',[ProductsController::class,'store'])->name('products.store');
 Route::get('/products/show/{id}',[ProductsController::class, 'show'])->name('products.show');
-Route::get('/products/edit/{id}',[ProductsController::class,'edit'])->name('products.edit');
-Route::post('/products/edit/{id}',[ProductsController::class,'update'])->name('products.update');
 Route::delete('/products/delete/{id}',[ProductsController::class, 'delete'])->name('products.delete');
-Route::get('products/mail', [ProductController::class, 'index']);
-
-//admin
-Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+});
 
 
 

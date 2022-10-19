@@ -19,14 +19,10 @@
                 </form>
                 </div>
             </div>
-            {{-- <div class="create-btn">
-                <form action=""></form>
-            </div> --}}
-        <div class="create-btn1">
-            <a href="{{ route('products.create') }}">Create</a>
-        </div>
+
     </div>
-        <table class="product-index">
+        <table class="table table-striped product-index">
+            <thead class="table-dark">
             <tr class="cat-ttl">
                 <th class="no">No</th>
                 <th class="name">User</th>
@@ -35,14 +31,18 @@
                 <th class="name">Description</th>
                 <th class="name">Price</th>
                 <th class="name">Updated_at</th>
-                <th class="name">Action</th>
+                <th style="width: 100px;">Action</th>
             </tr>
+            </thead>
 
             @foreach ($products as $product)
                 <tr>
 
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $product->user_id = auth()->user()->name }}</td>
+                    <td>{{ ++$i }}</td>
+                    <td>
+                        {{ $product->users?->name }}
+
+                    </td>
                     <td>{{ $product->title }}</td>
                     <td>
                         @foreach ($product->categories as $category){{ $category->name }}
@@ -57,11 +57,8 @@
                                     class="show show-btn">
                                     Info
                                 </a>
-                           <a href="{{ route('products.edit', $product->id) }}"
-                                    class="edit edit-btn">
-                                    Edit
-                                </a>
-                            <form class="del-form " action="{{ route('products.delete', $product->id) }}"
+
+                            <form class="del-form " action="{{ route('products.delete', $product->id) }}" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');"
                                 method="POST">
                                 @csrf
                                 @method('DELETE')
@@ -79,5 +76,20 @@
 
 
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script type="text/javascript">
+        var ctext = 'Confirm you want to Delete ? \n'
+        var permissiontext = document.getElementsByName('permissionname');
+
+        console.log(ctext);
+        console.log(permissiontext);
+
+        function ConfirmDelete() {
+
+            return confirm(ctext);
+        };
+    </script>
 </section>
 @endsection
