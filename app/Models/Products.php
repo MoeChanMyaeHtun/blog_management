@@ -24,5 +24,13 @@ class Products extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+
+    }
+      /**
+     * Get the post's image.
+     */
+    public function image()
+    {
+        return $this->morphOne(Image::class, 'imageable');
     }
 }

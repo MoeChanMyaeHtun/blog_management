@@ -5,18 +5,41 @@
     <div class="inner">
         <h1 class="cmn-ttl">Product</h1>
 
-        <div class="clearfix">
-            <div class="srch_wrpr">
-                <form action="" >
 
-                <input type="checkbox" name="title" class="checkbox">
-                <div class="srch_sb_cnt">
-                    <input type="text" name="title" id="" class="sech_txt_inpt" placeholder="Type to search...">
-                    <button class="srch_btn">
-                        <i class="fa fa-search" ></i>
-                    </button>
+    </div>
 
-                </form>
+
+        <div class="d-flex justify-content-between">
+
+        <div class="col-md-4">
+            <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data"  name="file">
+                @csrf
+
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="user_data" name="file">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" >Import</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+            <div class="col-md-2">
+              <a href="{{ route('products.export') }}" class="btn btn-primary">Export User</a>
+            </div>
+
+            <div class="col-md-4 ">
+                <div class="srch_wrpr">
+                    <form action="" >
+
+                    <input type="checkbox" name="title" class="checkbox">
+                    <div class="srch_sb_cnt">
+                        <input type="text" name="title" id="" class="sech_txt_inpt" placeholder="Type to search...">
+                        <button class="srch_btn">
+                            <i class="fa fa-search" ></i>
+                        </button>
+
+                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -72,6 +95,7 @@
         </table>
         {{-- {{ $products->links() }} --}}
         {{ $products->appends(request()->input())->links() }}
+        @include('flash-message')
 
 
 

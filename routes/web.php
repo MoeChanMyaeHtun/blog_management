@@ -31,7 +31,7 @@ Auth::routes();
 Route::get('logout', [LoginController::class, 'logout']);
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //product
 Route::get('/product',[ProductController::class, 'index'])->name('product');
@@ -40,7 +40,7 @@ Route::get('/product/edit/{id}',[ProductController::class,'edit'])->name('produc
 Route::post('/product/edit/{id}',[ProductController::class,'update'])->name('product.update');
 Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
 Route::post('/product/create',[ProductController::class,'store'])->name('product.store');
-// Route::get('products/mail', [ProductController::class, 'index']);
+Route::delete('/product/delete/{id}',[ProductController::class, 'delete'])->name('product.delete');
 
 
 
@@ -69,6 +69,8 @@ Route::delete('/profile/delete/{id}',[ProfileController::class, 'delete'])->name
 Route::get('/products',[ProductsController::class,'index'])->name('products.index');
 Route::get('/products/show/{id}',[ProductsController::class, 'show'])->name('products.show');
 Route::delete('/products/delete/{id}',[ProductsController::class, 'delete'])->name('products.delete');
+Route::get('/products/export',[ProductsController::class, 'export'])->name('products.export');
+Route::post('/products/import', [ProductsController::class, 'import'])->name('products.import');
 });
 
 

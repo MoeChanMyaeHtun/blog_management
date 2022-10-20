@@ -11,20 +11,21 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        $profiles = User::orderBy('updated_at', 'DESC')->orderBy('created_at', 'DESC')->paginate(5);
+        $profiles = User::orderBy('updated_at', 'id')->paginate(5);
         $i = ($request->input('page', 1) - 1) * 5;
         return view('admin.profile.index', compact('profiles','i'));
 
     }
     public function edit($id){
         $profile = User::find($id);
-        // return view('profile.edit', compact('profile'));
-        if($profile->id == auth()->user()->id){
-            return view('admin.profile.edit', compact('profile'));
-        }
-        else{
-            return back()->with('error', 'Unauthorize');
-        }
+
+        return view('admin.profile.edit', compact('profile'));
+        // if($profile->id == auth()->user()->id){
+        //     return view('admin.profile.edit', compact('profile'));
+        // }
+        // else{
+        //     return back()->with('error', 'Unauthorize');
+        // }
     }
     public function update(Request $request,$id){
         $request -> validate([
@@ -43,13 +44,16 @@ class ProfileController extends Controller
     }
     public function delete($id){
        $profile = User::find($id);
-    if($profile->id == auth()->user()->id) {
-        $profile->delete();
-        return back();
-        } else {
-        return back()->with('error', 'Unauthorize');
-        }
-
+       $profile->delete();
+       return back()->with('success','product delete successfully .');
     }
+    // if($profile->id == auth()->user()->id) {
+    //     $profile->delete();
+    //     return back();
+    //     } else {
+    //     return back()->with('error', 'Unauthorize');
+    //     }
+
+    // }
 
 }

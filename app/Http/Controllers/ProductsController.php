@@ -8,7 +8,10 @@ use App\Mail\NotiMail;
 use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
+use App\Imports\ProductImport;
+use App\Exports\ProductsExport;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
 
@@ -84,6 +87,17 @@ class ProductsController extends Controller
         return redirect('/products')->with('success','product update successfully .');
     }
 
+    public function import(Request $request)
+    {
+         Excel::import(new ProductImport, $request->file);
+
+         return redirect()->route('products.index');
+    }
+
+    public function export(Products $product)
+    {
+    return Excel::download(new ProductsExport($product), 'products.csv');
+    }
 
     /**
      * To delete product information
@@ -93,21 +107,16 @@ class ProductsController extends Controller
     public function delete($id){
         $product = Products::find($id);
 
-
-
-        // if (Mail::failures()) {
-        //      return response()->Fail('Sorry! Please try again latter');
-        // }else{
-        //      return response()->success('Great! Successfully send in your mail');
-        //    }
         if($product){
         $product->categories()->detach();
         $product -> delete();
         }
         Mail::to('scm.myattheingiaung@gmail.com')->send(new NotiMail());
 
-           return redirect('/products')->with('success','product delete successfully .');
+        return redirect()->route('products.index')->with('success','product delete successfully .');
     }
+
+
 
 }
 

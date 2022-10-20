@@ -9,7 +9,7 @@
                     <div class="col-md-6">
                         <div class="images p-3">
                             <div class="text-center p-4">
-                                <img id="main-image" src="{{ asset('img/images.jpg') }}" width="250" />
+                                <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100%; height:300px">
                              </div>
 
                         </div>
@@ -33,18 +33,21 @@
                             <div class="cart mt-4 align-items-center">
 
                                     <div class="d-flex bd-highlight mb-3">
-                                    <div class="p-2 bd-highlight ">  <a href="{{ route('product.edit', $product->id) }}"
-                                        class=" edit edit-btn " style="width:100px ; text-align:center;">
+                                    <div class="p-2 bd-highlight ">
+                                        <a href="{{ route('product.edit', $product->id) }}"
+                                        class="btn btn-success" style="width:100px ; text-align:center;">
                                         Edit
-                                    </a></div>
+                                    </a>
+
+                                </div>
 
                                     <div class="ms-auto p-2 bd-highlight ">
-                                    <form class="del-form " action="{{ route('products.delete', $product->id) }}"
-                                        method="POST">
+                                    <form class="del-form " action="{{ route('product.delete', $product->id) }}"
+                                        method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
                                         @csrf
                                         @method('DELETE')
-
-                                        <input type="submit" class="del-btn " value="Del" style="width:100px">
+                                        <button type="button" class="btn btn-danger">Delete</button>
+                                        
                                     </form>
                                 </div>
                             </div>

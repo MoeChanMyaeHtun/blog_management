@@ -5,9 +5,9 @@
 
     <div class="inner">
 
-        <form action="{{ route('product.update', $product->id) }}" class="pcreate-box clearfix" method="POST">
+        <form action="{{ route('product.update', $product->id) }}" class="pcreate-box clearfix" method="POST" enctype="multipart/form-data">
             @csrf
-            
+
             <div class="back clearfix">
                 {{-- <a href="{{ route('products.index') }}" class="back-link"><i class="fa fa-sign-out"
                         style="font-size:24px;color:#ffffff"></i></a> --}}
@@ -18,6 +18,17 @@
                     value="{{ old('title', $product->title) }}">
 
                 @error('title')
+                    <span class="feedback " role="alert" class="display:block;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+
+            <div class="pcreate-input-box">
+                <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100px; height:100px">
+                <input type="file" name="image" id="" class="title"  @error('image') is-invalid @enderror  autocomplete="image" autofocus>
+
+                @error('image')
                     <span class="feedback " role="alert" class="display:block;">
                         <strong>{{ $message }}</strong>
                     </span>

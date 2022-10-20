@@ -4,13 +4,22 @@
     <section class="product-create">
         <div class="inner">
 
-                <form action="{{ route('product.store') }}"  class="pc-form" method="POST">
+                <form action="{{ route('product.store') }}"  class="pc-form" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="pc-box">
                 <input type="text" name="title" id="" class="title" placeholder="Enter product title" @error('title') is-invalid @enderror  autocomplete="title" autofocus>
 
                 @error('title')
+                    <span class="feedback " role="alert" class="display:block;">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </div>
+            <div class="pc-box">
+                <input type="file" name="image" id="" class="title"  @error('image') is-invalid @enderror  autocomplete="image" autofocus>
+
+                @error('image')
                     <span class="feedback " role="alert" class="display:block;">
                         <strong>{{ $message }}</strong>
                     </span>
