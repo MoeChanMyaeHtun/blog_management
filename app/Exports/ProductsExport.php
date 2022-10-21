@@ -4,8 +4,11 @@ namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
 use App\Models\Products;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ProductsExport implements FromCollection
+class ProductsExport implements WithHeadings,FromCollection,WithMapping
 {
     public function __construct(Products $product)
     {
@@ -22,11 +25,11 @@ class ProductsExport implements FromCollection
     public function map($product): array
     {
         return [
-            $product->user->name,
+            $product->users->name,
             $product->title,
+            $product->categories()->implode('name',','),
             $product->description,
             $product->price,
-            $product->categories()->implode('name',','),
         ];
     }
 
@@ -34,11 +37,12 @@ class ProductsExport implements FromCollection
     public function headings(): array
     {
         return[
-            'Username',
+            'User',
             'Title',
+            'Category_Name',
             'Description',
             'Price',
-            'Category Name'
+
         ];
     }
 }

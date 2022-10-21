@@ -22,21 +22,21 @@ class ProductController extends Controller
     {
         // $products = Products::all();
 
-        $products = Products::orderBy('id','desc')->paginate(6);
+        $products = Products::orderBy('id', 'desc')->paginate(6);
 
         return view('product', compact('products'));
-
     }
 
-     /**
+    /**
      * To show create product view
      *
      * @return View create product
      */
-    public function create(){
+    public function create()
+    {
         $categories  = Category::all();
 
-        return view('product_create',compact('categories'));
+        return view('product_create', compact('categories'));
     }
 
     /**
@@ -45,8 +45,9 @@ class ProductController extends Controller
      * @return View index product
      */
 
-    public function store(ProductStoreRequest $request){
-        $validated = $request->validated();
+    public function store(ProductStoreRequest $request)
+    {
+
         $product = new Products;
         $product->user_id = auth()->user()->id;
         $product->title = $request['title'];
@@ -55,18 +56,18 @@ class ProductController extends Controller
 
 
         $product->save();
-        foreach($request['category'] as $cat_id ){
+        foreach ($request['category'] as $cat_id) {
             $category = Category::find($cat_id);
-        $product->categories()->attach($category);
+            $product->categories()->attach($category);
         }
         $image = new Image();
-        if(request()->hasFile('image')){
+        if (request()->hasFile('image')) {
             $file = request()->file('image');
             // dd($file);
             $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
             $save_path = ('img');
-            $file->move($save_path, $save_path."/$file_name");
-            $image->name =  $file_name ;
+            $file->move($save_path, $save_path . "/$file_name");
+            $image->name =  $file_name;
             $image->path = "$save_path/$file_name";
             $product->image()->save($image);
         }
@@ -76,7 +77,7 @@ class ProductController extends Controller
 
 
 
-       /**
+    /**
      * To show product detail information
      *
      * @return View detail page
@@ -87,18 +88,19 @@ class ProductController extends Controller
         $product = Products::find($id);
         $user = User::all();
 
-        return view('product_detail',compact('product','categories'));
+        return view('product_detail', compact('product', 'categories'));
     }
 
-       /**
+    /**
      * To show product edit page
      *
      * @return View index edit
      */
-    public function edit($id){
+    public function edit($id)
+    {
         $categories  = Category::all();
         $product = Products::find($id);
-        return view('product_edit', compact('product','categories'));
+        return view('product_edit', compact('product', 'categories'));
     }
 
     /**
@@ -106,46 +108,54 @@ class ProductController extends Controller
      *
      * @return View index product
      */
-    public function update(ProductUpdateRequest $request, $id){
+    public function update(ProductUpdateRequest $request, $id)
+    {
 
-        $product =Products::find($id);
-        $product ->title = $request['title'];
-        $product ->description = $request['description'];
-        $product ->price = $request['price'];
-        $product -> save();
+        $product = Products::find($id);
+        $product->title = $request['title'];
+        $product->description = $request['description'];
+        $product->price = $request['price'];
+        $product->save();
         $product->categories()->detach();
-        foreach($request['category'] as $cat_id ){
+        foreach ($request['category'] as $cat_id) {
             $category = Category::find($cat_id);
-        $product->categories()->attach($category);
+            $product->categories()->attach($category);
         }
 
-        $image = Image::where('imageable_id',$id)->first();
-        if(request()->hasFile('image')){
-            unlink(public_path('img/'.$image->name));
+        $image = Image::where('imageable_id', $id)->first();
+        if (request()->hasFile('image')) {
+            unlink(public_path('img/' . $image->name));
             $file = request()->file('image');
             // dd($file);
             $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
             $save_path = ('img');
-            $file->move($save_path, $save_path."/$file_name");
-            $image->name =  $file_name ;
+            $file->move($save_path, $save_path . "/$file_name");
+            $image->name =  $file_name;
             $image->path = "$save_path/$file_name";
             $product->image()->save($image);
         }
 
 
-        return redirect('product')->with('success','product update successfully .');
+        return redirect('product')->with('success', 'product update successfully .');
     }
-    public function delete($id){
+    /**
+     * To delete product information
+     *
+     * @return View index product
+     */
+    public function delete($id)
+    {
         $product = Products::find($id);
-
-        if($product){
-        $product->categories()->detach();
-        $product -> delete();
+        $email = $product->users->email;
+        // dd($email);
+        if ($product) {
+            $product->categories()->detach();
+            $product->delete();
         }
-        Mail::to('scm.myattheingiaung@gmail.com')->send(new NotiMail());
 
-        return redirect()->route('product')->with('success','product delete successfully .');
+
+        Mail::to($email)->send(new NotiMail());
+
+        return redirect()->route('product')->with('success', 'product delete successfully .');
     }
-
-
 }

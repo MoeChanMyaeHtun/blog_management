@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -53,9 +54,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' => ['required','regex:/^([(09)\(01)\0-9\s\(-)\+\(\)]*)$/','max:12'],
+            'phone' => ['required','regex:/^([(09)\(01)\(0-9)\s\+\(\)]*)$/','max:12'],
             'address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image'=>['required'],
         ]);
     }
 
@@ -68,12 +70,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+
+       $profile = new User();
+       $profile->name = $data['name'];
+       $profile->email = $data['email'];
+       $profile->phone = $data['phone'];
+       $profile->address = $data['address'];
+       $profile->password = Hash::make($data['password']);
+       $profile->save();
+
+        $image = new Image();
+
+            $file = request()->file('image');
+            // dd($file);
+            $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
+            $save_path = ('img/profile');
+            $file->move($save_path, $save_path."/$file_name");
+            $image->name =  $file_name ;
+            $image->path = "$save_path/$file_name";
+           $profile->image()->save($image);
+
+        return $profile;
     }
 }

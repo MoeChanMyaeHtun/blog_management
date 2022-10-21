@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\frontend\ProductController;
+use App\Http\Controllers\frontend\ProfilesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +34,13 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//profile
+Route::get('/profile',[ProfilesController::class,'index'])->name('profiles');
+Route::get('/profile/edit/{id}',[ProfilesController::class,'edit'])->name('profiles.edit');
+Route::post('/profile/edit/{id}',[ProfilesController::class,'update'])->name('profiles.update');
+Route::delete('/profile/delete/{id}',[ProfilesController::class, 'delete'])->name('profiles.delete');
+
 
 //product
 Route::get('/product',[ProductController::class, 'index'])->name('product');

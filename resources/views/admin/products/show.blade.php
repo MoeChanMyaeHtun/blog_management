@@ -19,6 +19,12 @@
                         <div class="r"><p>:{{ $product->title }}</p></div>
                     </li>
                     <li class="clearfix">
+                        <div class="l"><h3>Category</h3> </div>
+
+                        <div class="r"><p>: @foreach ($product->categories as $category){{ $category->name }}
+                            @endforeach</p></div>
+                    </li>
+                    <li class="clearfix">
                         <div class="l"><h3>Description</h3> </div>
 
                         <div class="r"><p>:{{ $product->description }}</p></div>
@@ -32,6 +38,6 @@
                 </ul>
             </div>
         </div>
-        
+
     </div>
 @endsection

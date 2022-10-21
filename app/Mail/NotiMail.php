@@ -26,8 +26,13 @@ class NotiMail extends Mailable
      *
      * @return $this
      */
+    // public function build()
+    // {
+    //     return $this->view('mail');
+    // }
+
     public function build()
     {
-        return $this->view('mail');
+        return $this->from('scm.moechanmyaehtun@gmail.com')->view('mail');
     }
 }

@@ -8,10 +8,7 @@
         <form action="{{ route('product.update', $product->id) }}" class="pcreate-box clearfix" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="back clearfix">
-                {{-- <a href="{{ route('products.index') }}" class="back-link"><i class="fa fa-sign-out"
-                        style="font-size:24px;color:#ffffff"></i></a> --}}
-            </div>
+            
             <div class="pcreate-input-box">
                 <input type="text" name="title" class="pcreate-input" placeholder="Enter your title"
                     @error('title') is-invalid @enderror autocomplete="title" autofocus

@@ -1,4 +1,4 @@
-@extends('../admin/index')
+@extends('layouts.app')
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @section('content')
     <section class="sec-index">
@@ -6,15 +6,16 @@
             <h1 class="cmn-ttl">User Profile</h1>
 
             <div class="mt-5">
-                <table class="table  table-striped text-center   mx-auto">
-                    <thead class="table-dark">
+                <table class="table table-striped text-center w-auto mx-auto">
+                    <thead class="table-success">
                         <tr class="profile-ttl">
                             <th>No</th>
-                            <th class="name">Name</th>
-                            <th class="email">Email</th>
+                            <th>Image</th>
+                            <th >Name</th>
+                            <th>Email</th>
                             <th>Phone</th>
                             <th>Address</th>
-                            <th class="update">Updated_at</th>
+                            <th >Updated_at</th>
                             <th style="width: 100px;">Action</th>
                         </tr>
                     </thead>
@@ -24,6 +25,10 @@
                             <tr>
 
                                 <td>{{ ++$i }}</td>
+                                <td>
+                                    <img src="{{ asset($profile->image?->path) }}" alt="image" style="width:100%; height:100px">
+
+                                </td>
                                 <td>{{ $profile->name }}</td>
                                 <td>{{ $profile->email }}</td>
                                 <td>{{ $profile->phone }}</td>
@@ -31,31 +36,33 @@
                                 <td>{{ $profile->updated_at }}</td>
                                 <td>
 
-                                    <div class="cart  align-items-center ">
 
-                                        <div class="d-flex  mb-2 mr-2">
-                                            <div>
-                                                <a href="{{ route('profile.edit', $profile->id) }}"
-                                                    class="btn btn-info" style=" text-align:center;">
-                                                    Edit
-                                                </a>
+                                    <div class="cart mt-4 align-items-center ">
 
-                                            </div>
+                                        <div class="d-flex  mb-2">
+                                        <div class="p-2  ">
+                                            <a href="{{ route('profiles.edit', $profile->id) }}"
+                                            class="btn btn-success" style="width:100px ; text-align:center;">
+                                            Edit
+                                        </a>
 
-                                            <div class="ms-auto   ">
+                                    </div>
 
-                                                <form class="del-form "
-                                                    onsubmit="return confirm('Please confirm you want to delete! {{ $profile->name }} ');"
-                                                    action="{{ route('profile.delete', $profile->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="btn btn-danger ml-2 " onclick="myFunction()">
-                                                        Del
+                                        <div class="ms-auto p-2  ">
 
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
+                                        <form class="del-form "
+                                        onsubmit="return confirm('Please confirm you want to delete! {{ $profile->name }} ');"
+                                        action="{{ route('profile.delete', $profile->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger " onclick="myFunction()">
+                                            Delete
+
+                                        </button>
+                                    </form>
+                                    </div>
+                                </div>
+
                                 </td>
                             </tr>
                         @endforeach
