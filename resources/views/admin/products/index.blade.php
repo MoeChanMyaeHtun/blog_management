@@ -23,25 +23,27 @@
                     </div>
                 </form>
             </div>
-            <div class="col-md-2">
-                <a href="{{ route('products.export') }}" class="btn btn-primary">Export User</a>
-            </div>
+            <div class="col-md-6">
+                <form action="">
 
-            <div class="col-md-4 ">
+                <button class="btn btn-primary" name="export">Export User</button>
+
+
                 <div class="srch_wrpr">
-                    <form action="">
 
                         <input type="checkbox" name="title" class="checkbox">
                         <div class="srch_sb_cnt">
                             <input type="text" name="title" id="" class="sech_txt_inpt"
                                 placeholder="Type to search...">
-                            <button class="srch_btn">
+                            <button name="search" class="srch_btn">
                                 <i class="fa fa-search"></i>
                             </button>
+                        </div>
 
-                    </form>
                 </div>
+
             </div>
+        </form>
         </div>
 
         </div>

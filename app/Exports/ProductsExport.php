@@ -3,14 +3,13 @@
 namespace App\Exports;
 
 use Maatwebsite\Excel\Concerns\FromCollection;
-use App\Models\Products;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
 class ProductsExport implements WithHeadings,FromCollection,WithMapping
 {
-    public function __construct(Products $product)
+    public function __construct($product)
     {
         $this->product = $product;
     }

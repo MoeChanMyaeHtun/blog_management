@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -12,6 +9,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\frontend\ProductController;
 use App\Http\Controllers\frontend\ProfilesController;
+use App\Http\Controllers\Admin\AdminAuthController;
 
 
 /*
@@ -55,6 +53,14 @@ Route::delete('/product/delete/{id}',[ProductController::class, 'delete'])->name
 
 //admin
 Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
+    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
+
+
+
+
+Route::group(['middleware' => 'adminauth'], function () {
+
 Route::get('/',[AdminController::class,'index'])->name('admin.index');
 
 // category
@@ -83,4 +89,4 @@ Route::post('/products/import', [ProductsController::class, 'import'])->name('pr
 });
 
 
-
+});

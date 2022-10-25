@@ -48,13 +48,17 @@
                                     data-abc="true">View Products</a></div>
 
                                 <div class="ms-auto p-2 bd-highlight ">
-                                <form class="del-form " action="{{ route('product.delete', $product->id) }}"
-                                    method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
-                                    @csrf
-                                    @method('DELETE')
+                                   
+                                    @can('edit', $product)
+                                    <form class="del-form " action="{{ route('product.delete', $product->id) }}"
+                                        method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
+                                        @csrf
+                                        @method('DELETE')
 
-                                    <button  class="btn btn-danger" onclick="myFunction()">Delete</button>
-                                </form>
+                                        <button  class="btn btn-danger" onclick="myFunction()">Delete</button>
+                                    </form>
+                                    @endcan
+
                             </div>
                         </div>
                     </div>

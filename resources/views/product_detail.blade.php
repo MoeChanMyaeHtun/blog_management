@@ -16,9 +16,6 @@
                     </div>
                     <div class="col-md-6">
                         <div class="product p-4">
-                            {{-- <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center"> <i class="fa fa-long-arrow-left"></i> <span class="ml-1">Back</span> </div> <i class="fa fa-shopping-cart text-muted"></i>
-                            </div> --}}
                             <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">{{ $product->users?->name }}</span>
                                 <h5 class="text-uppercase">{{ $product->title }}</h5>
 
@@ -31,25 +28,27 @@
                                 <h6 class="text-uppercase"><span>$</span>{{$product->price  }}</h6>
                             </div>
                             <div class="cart mt-4 align-items-center">
+                                        @can('edit', $product)
+                                        <div class="d-flex bd-highlight mb-3">
+                                            <div class="p-2 bd-highlight ">
+                                                <a href="{{ route('product.edit', $product->id) }}"
+                                                class="btn btn-success" style="width:100px ; text-align:center;">
+                                                Edit
+                                            </a>
 
-                                    <div class="d-flex bd-highlight mb-3">
-                                    <div class="p-2 bd-highlight ">
-                                        <a href="{{ route('product.edit', $product->id) }}"
-                                        class="btn btn-success" style="width:100px ; text-align:center;">
-                                        Edit
-                                    </a>
+                                        </div>
 
-                                </div>
+                                            <div class="ms-auto p-2 bd-highlight ">
+                                            <form class="del-form " action="{{ route('product.delete', $product->id) }}"
+                                                method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="button" class="btn btn-danger">Delete</button>
 
-                                    <div class="ms-auto p-2 bd-highlight ">
-                                    <form class="del-form " action="{{ route('product.delete', $product->id) }}"
-                                        method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" class="btn btn-danger">Delete</button>
-                                        
-                                    </form>
-                                </div>
+                                            </form>
+                                        </div>
+                                        @endcan
+
                             </div>
                         </div>
 

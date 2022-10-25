@@ -47,7 +47,7 @@
             <div class="profile-input">
                 <input type="text" name="phone" class="profile-input" placeholder="Enter your phone" @error('phone') is-invalid @enderror  autocomplete="phone" autofocus value="{{ old('phone', $profile->phone) }}">
 
-                @error('Phone')
+                @error('phone')
                     <span class="feedback " role="alert" class="display:block;">
                         <strong>{{ $message }}</strong>
                     </span>

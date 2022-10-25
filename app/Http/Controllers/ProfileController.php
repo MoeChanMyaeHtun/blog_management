@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProfileUpdateRequest;
 
 
 
@@ -20,40 +21,27 @@ class ProfileController extends Controller
         $profile = User::find($id);
 
         return view('admin.profile.edit', compact('profile'));
-        // if($profile->id == auth()->user()->id){
-        //     return view('admin.profile.edit', compact('profile'));
-        // }
-        // else{
-        //     return back()->with('error', 'Unauthorize');
-        // }
+
     }
-    public function update(Request $request,$id){
-        $request -> validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-        ]);
+    public function update(ProfileUpdateRequest $request,$id){
+        // $request -> validate([
+        //     'name' => 'required',
+        //     'email' => 'required',
+        //     'phone' => 'required',
+        //     'address' => 'required',
+        // ]);
        $profile = User::find($id);
        $profile ->name = $request['name'];
        $profile ->email = $request['email'];
        $profile ->phone = $request['phone'];
        $profile ->address = $request['address'];
        $profile -> save();
-        return redirect('/profile')->with('success','profile update successfully .');
+        return redirect('admin/profile')->with('success','profile update successfully .');
     }
     public function delete($id){
        $profile = User::find($id);
        $profile->delete();
        return back()->with('success','product delete successfully .');
     }
-    // if($profile->id == auth()->user()->id) {
-    //     $profile->delete();
-    //     return back();
-    //     } else {
-    //     return back()->with('error', 'Unauthorize');
-    //     }
-
-    // }
 
 }

@@ -28,19 +28,33 @@
                         <td>{{ $category->created_at }}</td>
                         <td>{{ $category->updated_at }}</td>
                         <td>
-                            <div class="btn-div clearfix">
-                                <a href="{{ route('categories.edit', $category->id) }}"
-                                        class="edit edit-btn">
-                                        Edit
-                                    </a>
-                                <form class="del-form " action="{{ route('categories.delete', $category->id) }}" onsubmit="return confirm('Please confirm you want to delete! {{ $category->name }} ');"
-                                     method="POST">
-                                    @csrf
-                                    @method('DELETE')
+                            <div class="cart  align-items-center ">
 
-                                    <input type="submit" class="del-btn" value="Del">
-                                </form>
-                            </div>
+                                <div class="d-flex  mb-2 mr-2">
+                                    <div>
+                                        <a href="{{ route('categories.edit', $category->id) }}"
+                                            class="btn btn-info" style=" text-align:center;">
+                                            Edit
+                                        </a>
+
+                                    </div>
+
+                                    <div class="ms-auto   ">
+
+                                        <form class="del-form "
+                                            onsubmit="return confirm('Please confirm you want to delete! {{ $category->name }} ');"
+                                            action="{{ route('categories.delete', $category->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger ml-2 " onclick="myFunction()">
+                                                Del
+
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                           
                         </td>
                     </tr>
                 @endforeach

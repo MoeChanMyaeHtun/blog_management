@@ -9,28 +9,28 @@
             <div class="detail-box1">
                 <ul class="detail-list">
                     <li class="clearfix">
-                        <div class="l"><h3>User</h3> </div>
+                        <div class="l"><h4>User</h4> </div>
 
-                        <div class="r"><p>:{{ $product->user_id = auth()->user()->name }}</p></div>
+                        <div class="r"><p>:{{  $product->users?->name  }}</p></div>
                     </li>
                     <li class="clearfix">
-                        <div class="l"><h3>Title</h3> </div>
+                        <div class="l"><h4>Title</h4> </div>
 
                         <div class="r"><p>:{{ $product->title }}</p></div>
                     </li>
                     <li class="clearfix">
-                        <div class="l"><h3>Category</h3> </div>
+                        <div class="l"><h4>Category</h4> </div>
 
                         <div class="r"><p>: @foreach ($product->categories as $category){{ $category->name }}
                             @endforeach</p></div>
                     </li>
                     <li class="clearfix">
-                        <div class="l"><h3>Description</h3> </div>
+                        <div class="l"><h4>Description</h4> </div>
 
                         <div class="r"><p>:{{ $product->description }}</p></div>
                     </li>
                     <li class="clearfix">
-                        <div class="l"><h3>Price</h3> </div>
+                        <div class="l"><h4>Price</h4> </div>
 
                         <div class="r"><p>:{{ $product->price}}</p></div>
                     </li>

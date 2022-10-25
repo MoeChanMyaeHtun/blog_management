@@ -75,7 +75,7 @@
                                 <i class="nav-icon fas fa-tachometer-alt" style="font-size: 17px"></i>
                                 <p>
                                     Dashboard
-                                    
+
                                 </p>
                             </a>
 
@@ -113,7 +113,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('adminLoginPost') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-right-from-bracket"></i>
                                 <p>
                                     Logout

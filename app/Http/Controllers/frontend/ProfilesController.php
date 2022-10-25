@@ -13,21 +13,22 @@ class ProfilesController extends Controller
 {
     public function index(Request $request)
     {
-        $profiles = User::orderBy('id','desc')->paginate(5);
-        $i = ($request->input('page', 1) - 1) * 5;
-        return view('profile', compact('profiles','i'));
+        $profiles = User::all();
+
+        return view('profile', compact('profiles'));
 
     }
+
     public function edit($id){
         $profile = User::find($id);
 
-        return view('profile_edit', compact('profile'));
-        // if($profile->id == auth()->user()->id){
-        //     return view('admin.profile.edit', compact('profile'));
-        // }
-        // else{
-        //     return back()->with('error', 'Unauthorize');
-        // }
+        if($profile->id == auth()->user()->id){
+            return view('profile_edit', compact('profile'));
+        }else{
+             abort(403);
+        }
+
+
     }
     public function update(Request $request,$id){
         $request -> validate([
@@ -48,7 +49,7 @@ class ProfilesController extends Controller
        if(request()->hasFile('image')){
            unlink(public_path('img/profile/'.$image->name));
            $file = request()->file('image');
-        //    dd($file);
+
            $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
            $save_path = ('img/profile');
            $file->move($save_path, $save_path."/$file_name");
@@ -56,20 +57,14 @@ class ProfilesController extends Controller
            $image->path = "$save_path/$file_name";
            $profile->image()->save($image);
        }
+
         return redirect('/profile')->with('success','profile update successfully .');
     }
     public function delete($id){
        $profile = User::find($id);
        $profile->delete();
+
        return back()->with('success','product delete successfully .');
     }
-    // if($profile->id == auth()->user()->id) {
-    //     $profile->delete();
-    //     return back();
-    //     } else {
-    //     return back()->with('error', 'Unauthorize');
-    //     }
-
-    // }
 
 }

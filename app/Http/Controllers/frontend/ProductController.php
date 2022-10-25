@@ -10,6 +10,7 @@ use App\Models\Products;
 use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
@@ -97,10 +98,15 @@ class ProductController extends Controller
      * @return View index edit
      */
     public function edit($id)
+
     {
         $categories  = Category::all();
         $product = Products::find($id);
-        return view('product_edit', compact('product', 'categories'));
+        if ( Gate::allows('edit', $product)) {
+              return view('product_edit', compact('product', 'categories'));
+        }else{
+            abort(403);
+        }
     }
 
     /**

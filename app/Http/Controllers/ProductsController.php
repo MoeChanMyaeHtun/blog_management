@@ -29,17 +29,26 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
 
+        if($request->isMethod('get')){
+        if ($request->has('search'))
+            {
+                $products = Products::where('title', 'LIKE', '%' . $request->title . '%')->paginate(5);
+            }
+            elseif($request->has('export')){
 
-        if ($request['title'] != null) {
-            $products = Products::where('title', 'LIKE', '%' . $request->title . '%')->paginate(5);
-        } else {
+                $p= Products::where('title', 'LIKE', '%' . $request->title . '%')->get();
+                // return $p;
+                return Excel::download(new ProductsExport($p), 'products.csv');
+            }
+            else {
             $products = Products::orderBy('id', 'desc')->paginate(5);
-        }
+            }
         $i = ($request->input('page', 1) - 1) * 5;
 
         return view('admin.products.index', compact('products', 'i'));
-    }
 
+        }
+    }
 
     /**
      * To show product edit page
@@ -86,7 +95,7 @@ class ProductsController extends Controller
             $category = Category::find($cat_id);
             $product->categories()->attach($category);
         }
-        return redirect('/products')->with('success', 'product update successfully .');
+        return redirect('admin/products')->with('success', 'product update successfully .');
     }
 
     public function import(Request $request)
@@ -96,10 +105,6 @@ class ProductsController extends Controller
         return redirect()->route('products.index');
     }
 
-    public function export(Products $product)
-    {
-        return Excel::download(new ProductsExport($product), 'products.csv');
-    }
 
     /**
      * To delete product information

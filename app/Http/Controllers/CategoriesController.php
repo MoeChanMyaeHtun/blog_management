@@ -47,7 +47,7 @@ class CategoriesController extends Controller
         $category->name = $request['name'];
         $category->save();
 
-        return redirect('/categories');
+        return redirect('admin/categories');
     }
      /**
      * To show edit category view
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
         $category ->name = $request['name'];
         $category -> save();
 
-        return redirect('/categories')->with('success','Category update successfully .');
+        return redirect('admin/categories')->with('success','Category update successfully .');
     }
 
     /**

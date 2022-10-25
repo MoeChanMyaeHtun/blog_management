@@ -6,10 +6,10 @@
         <div class="col-md-8">
                     <form method="POST" action="{{ route('login') }}" class="box">
                         @csrf
-                    @csrf
+                 
                     <h1>Login</h1>
                     <p class="text-muted"> Please enter your login and password!</p>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="current-email" placeholder="email">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"  autocomplete="current-email" placeholder="email">
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -17,7 +17,7 @@
                         </span>
                     @enderror
 
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="current-password" placeholder="Password">
 
                     @error('password')
                         <span class="invalid-feedback" role="alert">
