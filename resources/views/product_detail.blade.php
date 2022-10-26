@@ -38,7 +38,7 @@
 
                                         </div>
 
-                                            <div class="ms-auto p-2 bd-highlight ">
+                                            {{-- <div class="ms-auto p-2 bd-highlight ">
                                             <form class="del-form " action="{{ route('product.delete', $product->id) }}"
                                                 method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
                                                 @csrf
@@ -46,7 +46,7 @@
                                                 <button type="button" class="btn btn-danger">Delete</button>
 
                                             </form>
-                                        </div>
+                                        </div> --}}
                                         @endcan
 
                             </div>

@@ -7,15 +7,15 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 
-class ProductsExport implements WithHeadings,FromCollection,WithMapping
+class ProductsExport implements WithHeadings, FromCollection, WithMapping
 {
     public function __construct($product)
     {
         $this->product = $product;
     }
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
         return $this->product;
@@ -26,7 +26,7 @@ class ProductsExport implements WithHeadings,FromCollection,WithMapping
         return [
             $product->users->name,
             $product->title,
-            $product->categories()->implode('name',','),
+            $product->categories()->implode('name', ','),
             $product->description,
             $product->price,
         ];
@@ -35,7 +35,7 @@ class ProductsExport implements WithHeadings,FromCollection,WithMapping
 
     public function headings(): array
     {
-        return[
+        return [
             'User',
             'Title',
             'Category_Name',

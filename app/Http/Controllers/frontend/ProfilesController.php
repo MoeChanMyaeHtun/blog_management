@@ -60,11 +60,6 @@ class ProfilesController extends Controller
 
         return redirect('/profile')->with('success','profile update successfully .');
     }
-    public function delete($id){
-       $profile = User::find($id);
-       $profile->delete();
-
-       return back()->with('success','product delete successfully .');
-    }
+   
 
 }

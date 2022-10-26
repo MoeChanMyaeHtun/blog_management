@@ -3,7 +3,7 @@
 @section('content')
     <section class="product-create">
         <div class="inner">
-
+            
                 <form action="{{ route('product.store') }}"  class="pc-form" method="POST" enctype="multipart/form-data">
                 @csrf
 

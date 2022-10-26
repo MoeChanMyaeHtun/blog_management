@@ -23,9 +23,11 @@ class ProductController extends Controller
     {
         // $products = Products::all();
 
-        $products = Products::orderBy('id', 'desc')->paginate(6);
+        $products = Products::where('user_id',auth()->user()->id)->paginate(6);
 
-        return view('product', compact('products'));
+            return view('product', compact('products'));
+
+
     }
 
     /**
@@ -37,7 +39,8 @@ class ProductController extends Controller
     {
         $categories  = Category::all();
 
-        return view('product_create', compact('categories'));
+            return view('product_create', compact('categories'));
+
     }
 
     /**
@@ -64,7 +67,6 @@ class ProductController extends Controller
         $image = new Image();
         if (request()->hasFile('image')) {
             $file = request()->file('image');
-            // dd($file);
             $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
             $save_path = ('img');
             $file->move($save_path, $save_path . "/$file_name");
@@ -105,7 +107,7 @@ class ProductController extends Controller
         if ( Gate::allows('edit', $product)) {
               return view('product_edit', compact('product', 'categories'));
         }else{
-            abort(403);
+            return redirect('product');
         }
     }
 
@@ -141,7 +143,6 @@ class ProductController extends Controller
             $product->image()->save($image);
         }
 
-
         return redirect('product')->with('success', 'product update successfully .');
     }
     /**
@@ -153,10 +154,12 @@ class ProductController extends Controller
     {
         $product = Products::find($id);
         $email = $product->users->email;
-        // dd($email);
+        $image = Image::where('imageable_id', $id)->first();
         if ($product) {
             $product->categories()->detach();
+            unlink(public_path('img/' . $image->name));
             $product->delete();
+            $product->image()->delete();
         }
 
 

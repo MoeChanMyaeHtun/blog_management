@@ -7,7 +7,7 @@
         @foreach ($profiles as $profile)
         @if ($profile->id == auth()->user()->id)
         <div class="profile-card-4 text-center">
-            
+
             <img src="{{ asset($profile->image?->path) }}" class="img img-responsive">
             <div class="profile-content">
                 <div class="profile-name">

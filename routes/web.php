@@ -32,7 +32,9 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/product/show/{id}',[ProductController::class, 'show'])->name('product.detail');
 
+Route::group(['middleware' => 'auth'], function () {
 //profile
 Route::get('/profile',[ProfilesController::class,'index'])->name('profiles');
 Route::get('/profile/edit/{id}',[ProfilesController::class,'edit'])->name('profiles.edit');
@@ -42,25 +44,22 @@ Route::delete('/profile/delete/{id}',[ProfilesController::class, 'delete'])->nam
 
 //product
 Route::get('/product',[ProductController::class, 'index'])->name('product');
-Route::get('/product/show/{id}',[ProductController::class, 'show'])->name('product.detail');
+
 Route::get('/product/edit/{id}',[ProductController::class,'edit'])->name('product.edit');
 Route::post('/product/edit/{id}',[ProductController::class,'update'])->name('product.update');
 Route::get('/product/create',[ProductController::class,'create'])->name('product.create');
 Route::post('/product/create',[ProductController::class,'store'])->name('product.store');
 Route::delete('/product/delete/{id}',[ProductController::class, 'delete'])->name('product.delete');
 
-
+});
 
 //admin
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
 
-
-
-
-Route::group(['middleware' => 'adminauth'], function () {
-
+ Route::group(['middleware' => 'adminauth'], function () {
+//admin index
 Route::get('/',[AdminController::class,'index'])->name('admin.index');
 
 // category

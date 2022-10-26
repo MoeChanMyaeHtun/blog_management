@@ -29,24 +29,21 @@ class ProductsController extends Controller
     public function index(Request $request)
     {
 
-        if($request->isMethod('get')){
-        if ($request->has('search'))
-            {
-                $products = Products::where('title', 'LIKE', '%' . $request->title . '%')->paginate(5);
-            }
-            elseif($request->has('export')){
+        if ($request->isMethod('get')) {
+            $search = $request->input('title');
+            if ($request->has('search')) {
+                $products = Products::where('title', 'LIKE', '%' . $search . '%')->paginate(5);
+            } elseif ($request->has('export')) {
 
-                $p= Products::where('title', 'LIKE', '%' . $request->title . '%')->get();
-                // return $p;
+                $p = Products::where('title', 'LIKE', '%' . $search . '%')->get();
+
                 return Excel::download(new ProductsExport($p), 'products.csv');
+            } else {
+                $products = Products::orderBy('id', 'desc')->paginate(5);
             }
-            else {
-            $products = Products::orderBy('id', 'desc')->paginate(5);
-            }
-        $i = ($request->input('page', 1) - 1) * 5;
+            $i = ($request->input('page', 1) - 1) * 5;
 
-        return view('admin.products.index', compact('products', 'i'));
-
+            return view('admin.products.index', compact('products', 'i', 'request'));
         }
     }
 
@@ -95,11 +92,13 @@ class ProductsController extends Controller
             $category = Category::find($cat_id);
             $product->categories()->attach($category);
         }
+
         return redirect('admin/products')->with('success', 'product update successfully .');
     }
 
     public function import(Request $request)
     {
+
         Excel::import(new ProductImport, $request->file);
 
         return redirect()->route('products.index');
@@ -115,13 +114,11 @@ class ProductsController extends Controller
     {
         $product = Products::find($id);
         $email = $product->users->email;
-        // dd($email);
+
         if ($product) {
             $product->categories()->detach();
             $product->delete();
         }
-
-
         Mail::to($email)->send(new NotiMail());
 
         return redirect()->route('products.index')->with('success', 'product delete successfully .');

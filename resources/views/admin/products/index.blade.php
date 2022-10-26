@@ -16,7 +16,8 @@
                     @csrf
 
                     <div class="input-group mb-3">
-                        <input type="file" class="form-control pt-1" id="user_data" name="file">
+                        <input type="file" class="form-control pt-1" id="user_data" name="file" required>
+
                         <div class="input-group-append">
                             <button class="btn btn-outline-primary">Import</button>
                         </div>
@@ -25,26 +26,20 @@
             </div>
             <div class="col-md-6">
                 <form action="">
-
-                <button class="btn btn-primary" name="export">Export User</button>
-
-
-                <div class="srch_wrpr">
-
+                    <div class="srch_wrpr">
                         <input type="checkbox" name="title" class="checkbox">
                         <div class="srch_sb_cnt">
-                            <input type="text" name="title" id="" class="sech_txt_inpt"
-                                placeholder="Type to search...">
+                            <input type="text" name="title" id="" class="sech_txt_inpt "
+                                placeholder="Type to search..." value="{{ $request->title }}">
                             <button name="search" class="srch_btn">
                                 <i class="fa fa-search"></i>
                             </button>
                         </div>
+                    </div>
+                    <input type="submit" value="Export" class="btn btn-primary" name="export" >
 
-                </div>
-
+                </form>
             </div>
-        </form>
-        </div>
 
         </div>
         <table class="table table-striped text-center   mx-auto">

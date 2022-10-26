@@ -1,21 +1,60 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="{{ asset('css/user_product.css') }}">
 @section('content')
+
+
+
     <div class="container">
-        <h1 class="cmn-ttl">Product</h1>
-        <div class="row mb-5">
-            <div class="col-md-12 d-flex justify-content-end">
+        <div class="row mb-5 mt-5 " style="border-bottom:1px solid gray; padding-bottom:10px">
+            <div class="col-md-6 d-flex justify-content-left">
+                <h1 class="cmn-ttl mb-0 text-secondary" >User Product</h1>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+
                 <a href="{{ route('product.create') }}" class="btn btn-primary ">Create</a>
 
             </div>
+
         </div>
 
+        <div class="row ">
+            @foreach ($products as $product)
+            @if ($product->user_id == auth()->user()->id)
 
-        <div class="container mt-100">
+            <div class="col-md-3 mx-auto d-flex flex-column  product-item ">
+                <div class="title  pt-4 "><h4 style="padding-left: 10px" >{{ $product->title }}</h4></div>
+
+                <div class="product ">
+                    <hr>
+                    <img src="{{ asset($product->image?->path) }}" alt="image" style="width:350px; height:350px">
+                    <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
+                        <li class="icon"><a class="btn btn-primary" href="{{ route('product.detail', $product->id) }}"
+                            data-abc="true">Detail</a></li>
+                        <li class="icon mx-3"> @can('edit', $product)
+                            <form class="del-form " action="{{ route('product.delete', $product->id) }}"
+                                method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
+                                @csrf
+                                @method('DELETE')
+
+                                <button  class="btn btn-danger" onclick="myFunction()">Delete</button>
+                            </form>
+                            @endcan
+                            </li>
+
+                    </ul>
+                </div>
+
+            </div>
+            @endif
+            @endforeach
+
+
+        {{-- <div class="container mt-100">
 
             <div class="row ">
 
                 @foreach ($products as $product)
+                @if ($product->user_id == auth()->user()->id)
                     <div class="col-md-4 col-sm-6">
                         <div class="card mb-5">
                             <div>
@@ -35,6 +74,7 @@
                                         {{ $category->name }}
                                     @endforeach
                                 </p>
+                                <p class="text-muted"> {{ $product->description }}</p>
                                 <p class="text-muted"> {{ $product->price }}</p>
 
 
@@ -48,7 +88,7 @@
                                     data-abc="true">View Products</a></div>
 
                                 <div class="ms-auto p-2 bd-highlight ">
-                                   
+
                                     @can('edit', $product)
                                     <form class="del-form " action="{{ route('product.delete', $product->id) }}"
                                         method="POST" onsubmit="return confirm('Please confirm you want to delete! {{ $product->title }} ');">
@@ -68,8 +108,9 @@
                         <!--card mb-30-->
                     </div>
                     <!--col-md-4 col-sm-6-->
+                    @endif
                 @endforeach
-            </div>
+            </div> --}}
             <!--row-->
         </div>
         <!--container mt-100-->

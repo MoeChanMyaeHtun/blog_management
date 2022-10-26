@@ -21,17 +21,15 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         //Admin
 
-        $admins=[
+        Admin::create([
                 'name'=>'Admin',
                 'email'=>'admin@gmail.com',
                 'phone'=>'09987456123',
                 'address'=>'Mdy',
               'password' => Hash::make('admin'),
 
-        ];
-        foreach ($admins as $key => $admin) {
-            Admin::create($admin);
-        }
+        ]);
+
         //category
         Category::create([
 
