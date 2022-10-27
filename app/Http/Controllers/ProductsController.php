@@ -41,9 +41,9 @@ class ProductsController extends Controller
             } else {
                 $products = Products::orderBy('id', 'desc')->paginate(5);
             }
-            $i = ($request->input('page', 1) - 1) * 5;
 
-            return view('admin.products.index', compact('products', 'i', 'request'));
+
+            return view('admin.products.index', compact('products',  'request'));
         }
     }
 
@@ -81,7 +81,6 @@ class ProductsController extends Controller
      */
     public function update(ProductUpdateRequest $request, $id)
     {
-
         $product = Products::find($id);
         $product->title = $request['title'];
         $product->description = $request['description'];

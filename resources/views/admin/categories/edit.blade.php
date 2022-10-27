@@ -23,7 +23,7 @@
                 @enderror
             </div>
                 <div class="create-btn">
-                <input type="submit" value="Update" class="create-btn">
+                <input type="submit" value="Update" class="create-btn btn btn-success  ml-3">
             </div>
 
     </form>

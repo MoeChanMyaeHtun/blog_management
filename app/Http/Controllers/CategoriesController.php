@@ -19,10 +19,10 @@ class CategoriesController extends Controller
 
     public function index(Request $request)
     {
-        $categories = Category::orderBy('id', 'DESC')->paginate(5);
-        $i = ($request->input('page', 1) - 1) * 5;
 
-        return view('admin.categories.index', compact('categories','i'));
+        $categories = Category::orderBy('id', 'DESC')->paginate(5);
+
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -31,7 +31,7 @@ class CategoriesController extends Controller
      * @return View categories create
      */
     public function create(){
-        info("hello");
+
         return view('admin.categories.create');
     }
 
@@ -43,7 +43,6 @@ class CategoriesController extends Controller
 
 
         $category = new Category;
-
         $category->name = $request['name'];
         $category->save();
 

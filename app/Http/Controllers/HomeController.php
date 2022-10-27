@@ -22,18 +22,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // public function index()
-    // {
-    //     return view('home');
-    // }
+
     public function index(Request $request)
     {
-        // $products = Products::all();
 
-        $products = Products::orderBy('id', 'desc')->paginate(6);
+        if($request['title']!= null){
+            $products = Products::where('title','LIKE','%'.$request->title.'%')->paginate(5);
+        }else{
+            $products = Products::orderBy('id', 'desc')->paginate(6);
+
+        }
 
         return view('home', compact('products'));
     }
+
+
 
 
 }

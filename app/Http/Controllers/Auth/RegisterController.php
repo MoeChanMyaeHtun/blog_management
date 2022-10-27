@@ -70,8 +70,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
-
        $profile = new User();
        $profile->name = $data['name'];
        $profile->email = $data['email'];

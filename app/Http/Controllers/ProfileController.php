@@ -14,17 +14,29 @@ class ProfileController extends Controller
 {
     public function index(Request $request)
     {
-        $profiles = User::orderBy('id', 'desc')->paginate(5);
+        if($request['name']!= null){
+            $profiles = User::where('name','LIKE','%'.$request->name.'%')->paginate(5);
+
+        }else{
+            $profiles = User::orderBy('id', 'desc')->paginate(5);
+
+        }
+
         $i = ($request->input('page', 1) - 1) * 5;
 
         return view('admin.profile.index', compact('profiles', 'i'));
     }
+
+
     public function edit($id)
     {
         $profile = User::find($id);
 
         return view('admin.profile.edit', compact('profile'));
     }
+
+
+
     public function update(ProfileUpdateRequest $request, $id)
     {
 
@@ -37,11 +49,11 @@ class ProfileController extends Controller
 
         return redirect('admin/profile')->with('success', 'profile update successfully .');
     }
+
+
     public function delete($id)
     {
         $profile = User::find($id);
-        // $image = Image::where('imageable_id', $id)->first();
-        // unlink(public_path('img/profile/'.$image->name));
 
         $profile->delete();
 

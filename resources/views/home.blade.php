@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="{{asset('css/usersearch.css')}}">
 @section('content')
     <div class="container">
         <h1 class="cmn-ttl">All Product</h1>
@@ -7,15 +7,22 @@
 
         <div class="container mt-100">
 
+            <div class="row">
+                <div class="col-md-3">
+                    <form>
+                        <div class="form-group mb-4">
+                          <input id="exampleFormControlInput1" type="text" placeholder="What're you searching for?" class="form-control search" name="title">
+                        </div>
+                    </form>
+                </div>
+            </div>
             <div class="row ">
 
                 @foreach ($products as $product)
                     <div class="col-md-4 col-sm-6">
                         <div class="card mb-5">
                             <div>
-
                                 <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100%; height:300px">
-
                             </div>
                             <div class="card-body text-center">
 
@@ -40,7 +47,7 @@
                                 <div class="d-flex bd-highlight mb-3">
                                 <div class="p-2 bd-highlight ">
                                      <a class="btn btn-primary" href="{{ route('product.detail', $product->id) }}"
-                                    data-abc="true">View Products</a></div>
+                                    data-abc="true">  <i class="fa-sharp fa-solid fa-circle-info"></i> View Products</a></div>
 
                                 <div class="ms-auto p-2 bd-highlight ">
 
@@ -50,7 +57,7 @@
                                         @csrf
                                         @method('DELETE')
 
-                                        <button  class="btn btn-danger" onclick="myFunction()">Delete</button>
+                                        <button  class="btn btn-danger" onclick="myFunction()"><i class="fa-solid fa-trash-can"></i> Delete</button>
                                     </form>
                                     @endcan
 

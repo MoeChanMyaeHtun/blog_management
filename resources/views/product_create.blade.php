@@ -3,7 +3,7 @@
 @section('content')
     <section class="product-create">
         <div class="inner">
-            
+
                 <form action="{{ route('product.store') }}"  class="pc-form" method="POST" enctype="multipart/form-data">
                 @csrf
 
@@ -28,8 +28,8 @@
 
                 <div class="pc-box">
 
-                <select class="form-select" multiple aria-label="multiple select " name="category[]">
-
+              
+                  <select class="js-example-basic-multiple " style='width:100%' name="category[]" multiple="multiple">
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
@@ -56,12 +56,18 @@
             </div>
 
             <div class="pc-box">
-                <input type="submit" value="Create" class="pc-btn">
+                <input type="submit" value="Create" class="pc-btn btn btn-primary">
             </div>
                 </form>
 
         </div>
     </section>
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
 @endsection
 

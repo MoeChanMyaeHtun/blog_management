@@ -7,15 +7,6 @@
     <div class="inner">
            <form action="{{ route('profiles.update',$profile->id) }}" class="profile-box clearfix" method="POST" enctype="multipart/form-data">
             @csrf
-            {{-- <div class="back clearfix">
-                <h2 class="cmn-ttl2 pedit">Profile Edit</h2>
-                <a href="{{ route('profile.index') }}" class="back-link">
-
-                    <i class="fa-solid fa-arrow-left" style="font-size:24px;color:#ffffff"></i>
-                </a>
-            </div> --}}
-
-
 
             <div class="profile-input">
                 <input type="text" name="name" class="profile-input" placeholder="Enter your name" @error('name') is-invalid @enderror  autocomplete="name" autofocus value="{{ old('name', $profile->name) }}">

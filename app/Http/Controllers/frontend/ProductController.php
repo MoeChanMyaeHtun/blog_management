@@ -7,7 +7,6 @@ use App\Models\Image;
 use App\Mail\NotiMail;
 use App\Models\Category;
 use App\Models\Products;
-use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
@@ -21,13 +20,10 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        // $products = Products::all();
 
-        $products = Products::where('user_id',auth()->user()->id)->paginate(6);
+        $products = Products::where('user_id', auth()->id())->paginate(6);
 
-            return view('product', compact('products'));
-
-
+        return view('product', compact('products'));
     }
 
     /**
@@ -39,8 +35,7 @@ class ProductController extends Controller
     {
         $categories  = Category::all();
 
-            return view('product_create', compact('categories'));
-
+        return view('product_create', compact('categories'));
     }
 
     /**
@@ -53,7 +48,7 @@ class ProductController extends Controller
     {
 
         $product = new Products;
-        $product->user_id = auth()->user()->id;
+        $product->user_id = auth()->id();
         $product->title = $request['title'];
         $product->description = $request['description'];
         $product->price = $request['price'];
@@ -64,6 +59,7 @@ class ProductController extends Controller
             $category = Category::find($cat_id);
             $product->categories()->attach($category);
         }
+
         $image = new Image();
         if (request()->hasFile('image')) {
             $file = request()->file('image');
@@ -104,9 +100,10 @@ class ProductController extends Controller
     {
         $categories  = Category::all();
         $product = Products::find($id);
-        if ( Gate::allows('edit', $product)) {
-              return view('product_edit', compact('product', 'categories'));
-        }else{
+        if (Gate::allows('edit', $product)) {
+
+            return view('product_edit', compact('product', 'categories'));
+        } else {
             return redirect('product');
         }
     }
@@ -134,7 +131,6 @@ class ProductController extends Controller
         if (request()->hasFile('image')) {
             unlink(public_path('img/' . $image->name));
             $file = request()->file('image');
-            // dd($file);
             $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
             $save_path = ('img');
             $file->move($save_path, $save_path . "/$file_name");
@@ -143,7 +139,7 @@ class ProductController extends Controller
             $product->image()->save($image);
         }
 
-        return redirect('product')->with('success', 'product update successfully .');
+        return redirect()->route('product.detail',$id);
     }
     /**
      * To delete product information
@@ -155,13 +151,13 @@ class ProductController extends Controller
         $product = Products::find($id);
         $email = $product->users->email;
         $image = Image::where('imageable_id', $id)->first();
+
         if ($product) {
             $product->categories()->detach();
             unlink(public_path('img/' . $image->name));
             $product->delete();
             $product->image()->delete();
         }
-
 
         Mail::to($email)->send(new NotiMail());
 

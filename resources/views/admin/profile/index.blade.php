@@ -1,21 +1,32 @@
 @extends('../admin/index')
 <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+<link rel="stylesheet" href="{{ asset('css/usersearch.css') }}">
 @section('content')
     <section class="sec-index">
         <div class="inner">
-            <h1 class="cmn-ttl">User Profile</h1>
-
-            <div class="mt-5">
+            <div class="row">
+                <div class="col-md-9">
+            <h1 class="cmn-ttl text-left mb-0" >User Profile</h1>
+        </div>
+                <div class="col-md-3">
+                    <form>
+                        <div class="form-group mb-4">
+                          <input id="exampleFormControlInput1" type="text" placeholder="What're you searching for?" class="form-control search" name="name">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div >
                 <table class="table  table-striped text-center   mx-auto">
                     <thead class="table-dark">
                         <tr class="profile-ttl">
-                            <th>No</th>
-                            <th class="name">Name</th>
-                            <th class="email">Email</th>
+                            <th style="width: 50px">No</th>
+                            <th >Name</th>
+                            <th >Email</th>
                             <th>Phone</th>
                             <th>Address</th>
-                            <th class="update">Updated_at</th>
-                            <th style="width: 100px;">Action</th>
+                            <th >Updated_at</th>
+                            <th style="width: 200px;">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,7 +34,7 @@
                         @foreach ($profiles as $profile)
                             <tr>
 
-                                <td>{{ ++$i }}</td>
+                                <td>{{ request()->page? (request()->page - 1) * 5 + $loop->iteration : $loop->iteration }}</td>
                                 <td>{{ $profile->name }}</td>
                                 <td>{{ $profile->email }}</td>
                                 <td>{{ $profile->phone }}</td>
@@ -37,7 +48,7 @@
                                             <div>
                                                 <a href="{{ route('profile.edit', $profile->id) }}"
                                                     class="btn btn-info" style=" text-align:center;">
-                                                    Edit
+                                                    <i class="fa-solid fa-pen"></i>  Edit
                                                 </a>
 
                                             </div>
@@ -50,8 +61,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-danger ml-2 " onclick="myFunction()">
-                                                        Del
-
+                                                        <i class="fa-solid fa-trash-can"></i>  Del
                                                     </button>
                                                 </form>
                                             </div>

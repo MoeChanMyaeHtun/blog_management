@@ -55,15 +55,18 @@
 .container .product-item .product .icons .icon:nth-last-of-type(2) {
     transition-delay: 0.15s;
     margin-right:50px;
+    width: 100px;
 }
 
 .container .product-item .product .icons .icon:nth-last-of-type(1) {
     transition-delay: 0.1s;
     margin-right:50px;
+    width: 100px;
 }
 
 .container .product-item:hover .product .icons .icon {
-    transform: translateY(-100px)
+    transform: translateY(-100px);
+    width: 100px;
 }
 
 .container .product-item .tag {

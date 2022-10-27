@@ -38,9 +38,6 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
-
-
-
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
@@ -75,7 +72,6 @@
                                 <i class="nav-icon fas fa-tachometer-alt" style="font-size: 17px"></i>
                                 <p>
                                     Dashboard
-
                                 </p>
                             </a>
 
@@ -113,7 +109,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('adminLoginPost') }}" class="nav-link">
+                            <a href="{{ route('logout') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-right-from-bracket"></i>
                                 <p>
                                     Logout

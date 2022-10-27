@@ -11,9 +11,10 @@ use App\Http\Controllers\Controller;
 
 class ProfilesController extends Controller
 {
-    public function index(Request $request)
+    public function index($id)
     {
-        $profiles = User::all();
+        //user ta yout thrr htoke yann #KMT
+        $profiles = User::find($id);
 
         return view('profile', compact('profiles'));
 
@@ -22,15 +23,19 @@ class ProfilesController extends Controller
     public function edit($id){
         $profile = User::find($id);
 
-        if($profile->id == auth()->user()->id){
+        if($profile->id == auth()->user()->id)
+        {
             return view('profile_edit', compact('profile'));
-        }else{
+        }
+        else
+        {
              abort(403);
         }
 
 
     }
     public function update(Request $request,$id){
+        //request lote yannn #KMT
         $request -> validate([
             'name' => 'required',
             'email' => 'required',
@@ -49,7 +54,6 @@ class ProfilesController extends Controller
        if(request()->hasFile('image')){
            unlink(public_path('img/profile/'.$image->name));
            $file = request()->file('image');
-
            $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
            $save_path = ('img/profile');
            $file->move($save_path, $save_path."/$file_name");
@@ -60,6 +64,6 @@ class ProfilesController extends Controller
 
         return redirect('/profile')->with('success','profile update successfully .');
     }
-   
+
 
 }

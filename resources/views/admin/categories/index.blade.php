@@ -1,4 +1,4 @@
-@extends('../admin/index')
+@extends('admin/index')
 <link rel="stylesheet" href="{{asset('css/categories.css')}}">
 
 
@@ -8,7 +8,7 @@
             <div class="index-box">
                 <h1 class="cmn-ttl">Categories</h1>
             <div class="create-btn1">
-                <a href="{{ route('categories.create') }}">Create</a>
+                <a href="{{ route('categories.create') }}" class="btn btn-primary"><i class="fa-sharp fa-solid fa-plus"></i> Create</a>
             </div>
             <table class="table table-striped product-index">
                 <thead class="table-dark">
@@ -23,7 +23,7 @@
                 @foreach ($categories as $category)
                     <tr>
 
-                        <td>{{ ++$i}}</td>
+                        <td>{{ request()->page? (request()->page - 1) * 5 + $loop->iteration : $loop->iteration }}</td>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->created_at }}</td>
                         <td>{{ $category->updated_at }}</td>
@@ -34,7 +34,7 @@
                                     <div>
                                         <a href="{{ route('categories.edit', $category->id) }}"
                                             class="btn btn-info" style=" text-align:center;">
-                                            Edit
+                                            <i class="fa-solid fa-pen"></i> Edit
                                         </a>
 
                                     </div>
@@ -47,14 +47,13 @@
                                             @csrf
                                             @method('DELETE')
                                             <button class="btn btn-danger ml-2 " onclick="myFunction()">
-                                                Del
-
+                                                <i class="fa-solid fa-trash-can"></i>     Del
                                             </button>
                                         </form>
                                     </div>
                                 </div>
 
-                           
+
                         </td>
                     </tr>
                 @endforeach
@@ -70,10 +69,7 @@
         <script type="text/javascript">
             var ctext = 'Confirm you want to Delete ? \n'
             var permissiontext = document.getElementsByName('permissionname');
-
-            console.log(ctext);
-            console.log(permissiontext);
-
+         
             function ConfirmDelete() {
 
                 return confirm(ctext);
