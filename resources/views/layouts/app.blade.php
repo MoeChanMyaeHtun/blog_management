@@ -66,13 +66,14 @@
                         </li>
 
                                    <li class="nav-item  mr-2 mt-2">
-                            <a href="{{ route('profiles',Auth::id()) }}" class="nav-link">Profile</a>
+                            <a href="{{ route('profiles', Auth::id()) }}" class="nav-link">Profile</a>
 
                         </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    <img src="{{ asset(Auth::user()->image?->path)}}" alt="image" style="width:40px; height:40px;  border-radius:50% ;">
 
+                                    <img src="{{ asset(Auth::user()->image?->path)}}" alt="image" style="width:40px; height:40px;  border-radius:50% ;">
+                    
                                     {{ Auth::user()->name }}
                                 </a>
 

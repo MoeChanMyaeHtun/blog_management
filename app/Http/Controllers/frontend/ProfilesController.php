@@ -5,25 +5,22 @@ use App\Models\User;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserProfileRequest;
 
 
 
 
 class ProfilesController extends Controller
 {
-    public function index($id)
+    public function index(User $profile)
     {
-        //user ta yout thrr htoke yann #KMT
-        $profiles = User::find($id);
 
-        return view('profile', compact('profiles'));
-
+        return view('profile', compact('profile'));
     }
 
-    public function edit($id){
-        $profile = User::find($id);
+    public function edit(User $profile){
 
-        if($profile->id == auth()->user()->id)
+        if($profile->id == auth()->id())
         {
             return view('profile_edit', compact('profile'));
         }
@@ -34,36 +31,30 @@ class ProfilesController extends Controller
 
 
     }
-    public function update(Request $request,$id){
-        //request lote yannn #KMT
-        $request -> validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-        ]);
-       $profile = User::find($id);
+    public function update(UserProfileRequest $request,User $profile){
+
        $profile ->name = $request['name'];
        $profile ->email = $request['email'];
        $profile ->phone = $request['phone'];
        $profile ->address = $request['address'];
        $profile -> save();
 
+       $image = Image::where('imageable_id', $profile)->first();
 
-       $image = Image::where('imageable_id',$id)->first();
-       if(request()->hasFile('image')){
-           unlink(public_path('img/profile/'.$image->name));
-           $file = request()->file('image');
-           $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
-           $save_path = ('img/profile');
-           $file->move($save_path, $save_path."/$file_name");
-           $image->name =  $file_name ;
-           $image->path = "$save_path/$file_name";
-           $profile->image()->save($image);
-       }
-
-        return redirect('/profile')->with('success','profile update successfully .');
+       if(request()->file('image')!=null){
+        $file = request()->file('image');
+        $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
+        if($image = Image::where('imageable_type','App\Models\User')->where('imageable_id',$profile->id)->first()){
+            unlink(public_path('img/profile/'.$image->name));
+            $image->name = $file_name;
+            $image->path = 'img/profile'."/$file_name";
+        }
+        $file->move(public_path('img/profile'), 'img/profile'."/$file_name");
+        $profile->image()->save($image);
     }
 
 
+    return redirect()->route('profiles',$profile)->with('success','profile update successfully .');
+
+        }
 }

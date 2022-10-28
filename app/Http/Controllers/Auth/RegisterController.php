@@ -57,7 +57,7 @@ class RegisterController extends Controller
             'phone' => ['required','regex:/^([(09)\(01)\(0-9)\s\+\(\)]*)$/','max:12'],
             'address' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'image'=>['required'],
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
     }
 
@@ -70,6 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
        $profile = new User();
        $profile->name = $data['name'];
        $profile->email = $data['email'];
@@ -78,7 +79,9 @@ class RegisterController extends Controller
        $profile->password = Hash::make($data['password']);
        $profile->save();
 
+
         $image = new Image();
+        if(request()->file('image')!=null){
 
             $file = request()->file('image');
             // dd($file);
@@ -88,7 +91,13 @@ class RegisterController extends Controller
             $image->name =  $file_name ;
             $image->path = "$save_path/$file_name";
            $profile->image()->save($image);
+        }
+        else{
+                $image->name =  'user.png' ;
+                $image->path = "img/profile/user.png";
+               $profile->image()->save($image);
 
+            }
         return $profile;
     }
 }

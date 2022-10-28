@@ -22,7 +22,12 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="card mb-5">
                             <div>
+                                @if (!$product->image?->path)
+                                <img src="{{ asset('img/productd/default_product.png') }}" alt="image" style="width:100%; height:300px">
+                                @else
                                 <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100%; height:300px">
+                                @endif
+
                             </div>
                             <div class="card-body text-center">
 

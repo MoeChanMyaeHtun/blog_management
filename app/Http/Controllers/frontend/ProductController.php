@@ -61,7 +61,8 @@ class ProductController extends Controller
         }
 
         $image = new Image();
-        if (request()->hasFile('image')) {
+        if(request()->file('image')!=null){
+
             $file = request()->file('image');
             $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
             $save_path = ('img');
@@ -70,6 +71,7 @@ class ProductController extends Controller
             $image->path = "$save_path/$file_name";
             $product->image()->save($image);
         }
+
 
         return redirect('product');
     }
@@ -81,10 +83,10 @@ class ProductController extends Controller
      *
      * @return View detail page
      */
-    public function show($id)
+    public function show(Products $product)
     {
         $categories  = Category::all();
-        $product = Products::find($id);
+
         $user = User::all();
 
         return view('product_detail', compact('product', 'categories'));
@@ -95,11 +97,11 @@ class ProductController extends Controller
      *
      * @return View index edit
      */
-    public function edit($id)
+    public function edit(Products $product)
 
     {
         $categories  = Category::all();
-        $product = Products::find($id);
+
         if (Gate::allows('edit', $product)) {
 
             return view('product_edit', compact('product', 'categories'));
@@ -113,10 +115,10 @@ class ProductController extends Controller
      *
      * @return View index product
      */
-    public function update(ProductUpdateRequest $request, $id)
+    public function update(ProductUpdateRequest $request, Products $product)
     {
 
-        $product = Products::find($id);
+
         $product->title = $request['title'];
         $product->description = $request['description'];
         $product->price = $request['price'];
@@ -127,37 +129,48 @@ class ProductController extends Controller
             $product->categories()->attach($category);
         }
 
-        $image = Image::where('imageable_id', $id)->first();
-        if (request()->hasFile('image')) {
-            unlink(public_path('img/' . $image->name));
+        $image = Image::where('imageable_id',  $product)->first();
+        if(request()->file('image')!=null){
             $file = request()->file('image');
             $file_name = uniqid(time()) . '_' . $file->getClientOriginalName();
-            $save_path = ('img');
-            $file->move($save_path, $save_path . "/$file_name");
-            $image->name =  $file_name;
-            $image->path = "$save_path/$file_name";
+            if($image = Image::where('imageable_type','App\Models\Products')->where('imageable_id',$product->id)->first()){
+                unlink(public_path('img/'.$image->name));
+                $image->name = $file_name;
+                $save_path = ('img');
+                $image->path = $save_path."/$file_name";
+            }else{
+                $image = new Image();
+                $save_path = ('img');
+                $image->name = $file_name;
+                $image->path = $save_path."/$file_name";
+            }
+            $file->move(public_path($save_path), $save_path. "/$file_name");
             $product->image()->save($image);
         }
 
-        return redirect()->route('product.detail',$id);
+        return redirect()->route('product.detail', $product);
     }
     /**
      * To delete product information
      *
      * @return View index product
      */
-    public function delete($id)
+    public function delete(Products $product)
     {
-        $product = Products::find($id);
+
         $email = $product->users->email;
-        $image = Image::where('imageable_id', $id)->first();
+        $image = Image::where('imageable_id',  $product);
 
         if ($product) {
             $product->categories()->detach();
-            unlink(public_path('img/' . $image->name));
+
             $product->delete();
-            $product->image()->delete();
+
         }
+        if($image = Image::where('imageable_id',$product->id)->first()){
+            unlink(public_path('img/' . $image->name));
+            $product->image()->delete();
+           }
 
         Mail::to($email)->send(new NotiMail());
 

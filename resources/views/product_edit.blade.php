@@ -20,7 +20,11 @@
             </div>
 
             <div class="pcreate-input-box">
-                <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100px; height:100px">
+                @if (!$product->image?->path)
+                <img src="{{ asset('img/productd/default_product.png') }}" alt="image" style="width:100%; height:300px">
+                @else
+                <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100%; height:300px">
+                @endif
                 <input type="file" name="image" id="" class="title"  @error('image') is-invalid @enderror  autocomplete="image" autofocus>
 
                 @error('image')

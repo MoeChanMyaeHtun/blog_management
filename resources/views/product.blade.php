@@ -16,7 +16,7 @@
 
         <div class="row ">
             @foreach ($products as $product)
-                @if ($product->user_id == auth()->user()->id)
+                @if ($product->user_id == auth()->id())
                     <div class="col-md-3 mx-auto d-flex flex-column  product-item ">
                         <div class="title  pt-4 ">
                             <h4 style="padding-left: 10px">{{ $product->title }}</h4>
@@ -24,7 +24,11 @@
 
                         <div class="product ">
                             <hr>
-                            <img src="{{ asset($product->image?->path) }}" alt="image" style="width:350px; height:350px">
+                            @if (!$product->image?->path)
+                                <img src="{{ asset('img/productd/default_product.png') }}" alt="image" style="width:100%; height:300px">
+                                @else
+                                <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100%; height:300px">
+                                @endif
                             <ul class="d-flex align-items-center justify-content-center list-unstyled icons">
                                 <li class="icon">
                                     <a class="btn btn-primary"  href="{{ route('product.detail', $product->id) }}" data-abc="true" style="width: 100px"> <i class="fa-sharp fa-solid fa-circle-info"></i> Detail</a></li>

@@ -1,7 +1,7 @@
 @extends('../layouts/app')
 <link rel="stylesheet" href="{{asset('css/product.css')}}">
 @section('content')
-    <section class="product-create">
+    <section class="product-create pt-5 mt-4">
         <div class="inner">
 
                 <form action="{{ route('product.store') }}"  class="pc-form" method="POST" enctype="multipart/form-data">
@@ -28,7 +28,7 @@
 
                 <div class="pc-box">
 
-              
+
                   <select class="js-example-basic-multiple " style='width:100%' name="category[]" multiple="multiple">
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->name }}</option>

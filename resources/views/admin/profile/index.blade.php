@@ -21,6 +21,7 @@
                     <thead class="table-dark">
                         <tr class="profile-ttl">
                             <th style="width: 50px">No</th>
+                            <th style="width: 100px">Profile</th>
                             <th >Name</th>
                             <th >Email</th>
                             <th>Phone</th>
@@ -35,6 +36,7 @@
                             <tr>
 
                                 <td>{{ request()->page? (request()->page - 1) * 5 + $loop->iteration : $loop->iteration }}</td>
+                                <td><img src="{{asset ($profile->image?->path) }}" alt="" width="100px"></td>
                                 <td>{{ $profile->name }}</td>
                                 <td>{{ $profile->email }}</td>
                                 <td>{{ $profile->phone }}</td>

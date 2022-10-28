@@ -9,8 +9,11 @@
                         <div class="col-md-6">
                             <div class="images p-3">
                                 <div class="text-center p-4">
-                                    <img src="{{ asset($product->image?->path) }}" alt="image"
-                                        style="width:100%; height:300px">
+                                    @if (!$product->image?->path)
+                                    <img src="{{ asset('img/productd/default_product.png') }}" alt="image" style="width:100%; height:300px">
+                                    @else
+                                    <img src="{{ asset($product->image?->path) }}" alt="image" style="width:100%; height:300px">
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -65,7 +68,7 @@
 
     <div class="d-flex  mb-2 mr-2">
         <div>
-            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-info" style=" text-align:center;">
+            <a href="{{ route('product.edit', $product->id) }}" class="btn btn-info" style=" text-align:center;">
                 Edit
             </a>
 
@@ -74,8 +77,8 @@
         <div class="ms-auto   ">
 
             <form class="del-form "
-                onsubmit="return confirm('Please confirm you want to delete! {{ $category->name }} ');"
-                action="{{ route('categories.delete', $category->id) }}" method="POST">
+                onsubmit="return confirm('Please confirm you want to delete! {{ $product->name }} ');"
+                action="{{ route('product.delete', $product->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger ml-2 " onclick="myFunction()">

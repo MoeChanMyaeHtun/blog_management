@@ -52,10 +52,10 @@ class ProductsController extends Controller
      *
      * @return View index edit
      */
-    public function edit($id)
+    public function edit(Products $product)
     {
         $categories  = Category::all();
-        $product = Products::find($id);
+
 
         return view('admin.products.edit', compact('product', 'categories'));
     }
@@ -65,10 +65,10 @@ class ProductsController extends Controller
      *
      * @return View detail page
      */
-    public function show($id)
+    public function show(Products $product)
     {
         $categories  = Category::all();
-        $product = Products::find($id);
+
         $user = User::all();
 
         return view('admin.products.show', compact('product', 'categories'));
@@ -79,9 +79,9 @@ class ProductsController extends Controller
      *
      * @return View index product
      */
-    public function update(ProductUpdateRequest $request, $id)
+    public function update(ProductUpdateRequest $request, Products $product)
     {
-        $product = Products::find($id);
+
         $product->title = $request['title'];
         $product->description = $request['description'];
         $product->price = $request['price'];
@@ -109,11 +109,10 @@ class ProductsController extends Controller
      *
      * @return View index product
      */
-    public function delete($id)
+    public function delete(Products $product)
     {
-        $product = Products::find($id);
         $email = $product->users->email;
-
+        
         if ($product) {
             $product->categories()->detach();
             $product->delete();

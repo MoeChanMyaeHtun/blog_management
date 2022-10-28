@@ -61,7 +61,7 @@
                     <td>{{ $product->title }}</td>
                     <td>
                         @foreach ($product->categories as $category)
-                            {{ $category->name }}
+                            {{ $category->name }}<br>
                         @endforeach
                     </td>
                     {{-- <td>{{ $product->description }}</td> --}}

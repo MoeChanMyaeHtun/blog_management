@@ -2,11 +2,13 @@
 <link rel="stylesheet" href="{{ asset('css/user_profile.css') }}">
 @section('content')
     <section class="sec-index pt-2 mt-5">
-        @foreach ($profiles as $profile)
-        @if ($profile->id == auth()->user()->id)
         <div class="profile-card-4 text-center">
 
+            @if (!$profile->image?->path)
+            <img src="{{ asset('img/profile/user.png') }}" alt="image" class="img img-responsive" style="width:450px">
+            @else
             <img src="{{ asset($profile->image?->path) }}" class="img img-responsive">
+            @endif
             <div class="profile-content">
                 <div class="profile-name">
                     {{ $profile->name }}
@@ -42,8 +44,6 @@
                 </div>
             </div>
         </div>
-        @endif
-        @endforeach
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         <script src="/js/app.js"></script>

@@ -18,7 +18,11 @@
                 @enderror
             </div>
             <div class="profile-input">
-                <img src="{{ asset($profile->image?->path) }}" alt="image" style="width:100px; height:100px">
+                @if (!$profile->image?->path)
+                <img src="{{ asset('img/profile/user.png') }}" alt="image" class="img img-responsive" style="width:100px">
+                @else
+                <img src="{{ asset($profile->image?->path) }}" class="img img-responsive" style="width:100px" >
+                @endif
                 <input type="file" name="image" id="" class="title"  @error('image') is-invalid @enderror  autocomplete="image" autofocus>
 
                 @error('image')

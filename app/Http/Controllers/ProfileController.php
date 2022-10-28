@@ -28,19 +28,15 @@ class ProfileController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(User $profile)
     {
-        $profile = User::find($id);
-
         return view('admin.profile.edit', compact('profile'));
     }
 
 
 
-    public function update(ProfileUpdateRequest $request, $id)
+    public function update(ProfileUpdateRequest $request,User $profile)
     {
-
-        $profile = User::find($id);
         $profile->name = $request['name'];
         $profile->email = $request['email'];
         $profile->phone = $request['phone'];
@@ -51,10 +47,13 @@ class ProfileController extends Controller
     }
 
 
-    public function delete($id)
+    public function delete(User $profile)
     {
-        $profile = User::find($id);
-
+       
+        if($image = Image::where('imageable_id',$profile->id)->first()){
+         unlink(public_path('img/profile/' . $image->name));
+         $profile->image()->delete();
+        }
         $profile->delete();
 
         return back()->with('success', 'product delete successfully .');
