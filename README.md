@@ -22,14 +22,15 @@ git clone https://github.com/scm-ojt/laravel-batch-4-moechanmyaehtun.git
 - Run in terminal `npm run dev`
 - Run in browwser http://localhost:8000/
 ```
-##Feature
+## User Feature
 ```
-##user
+
 -Able to create account for both user easily and fastly in register page.
 -Able to view  all products and profile. 
+```
 
-
-##Admin
+## Admin Feature
+```
 -Admin acc(gmail-admin@gmail.com, password-admin)
 -Able to make category CRUD 
 -Able to view all categories ,product and user profile
