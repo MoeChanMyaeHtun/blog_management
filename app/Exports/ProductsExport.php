@@ -24,6 +24,7 @@ class ProductsExport implements WithHeadings, FromCollection, WithMapping
     public function map($product): array
     {
         return [
+            $product->id,
             $product->users->name,
             $product->title,
             $product->categories()->implode('name', ','),
@@ -36,11 +37,13 @@ class ProductsExport implements WithHeadings, FromCollection, WithMapping
     public function headings(): array
     {
         return [
+            'ID',
             'User',
             'Title',
             'Category_Name',
             'Description',
             'Price',
+            'del',
 
         ];
     }
