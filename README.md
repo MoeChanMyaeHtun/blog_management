@@ -36,11 +36,11 @@ git clone https://github.com/scm-ojt/laravel-batch-4-moechanmyaehtun.git
 -Able to make user profile delete.
 
 ```
-###User
+## User
 
 ![image](https://user-images.githubusercontent.com/114456459/198935563-d5da392d-e00a-4a60-8559-b1b57c82c492.png)
 
 
-###Admin
+## Admin
 
 ![image](https://user-images.githubusercontent.com/114456459/198935688-5a9b4290-f40d-4e07-a26d-c3f8c68036b1.png)
