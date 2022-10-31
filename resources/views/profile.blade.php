@@ -33,11 +33,14 @@
                     </div>
                     <div class="col-xs-4">
                         <div class="profile-overview">
-                            <a href="{{ route('profiles.edit', $profile->id) }}"
-                                class="btn btn-success" style="width:100px ; text-align:center;">
-                                <i class="fa-solid fa-pen"></i>
-                                Edit
-                            </a>
+
+                         @if ($profile->id==Auth::id())
+                         <a href="{{ route('profiles.edit', $profile->id) }}"
+                            class="btn btn-success" style="width:100px ; text-align:center;">
+                            <i class="fa-solid fa-pen"></i>
+                            Edit
+                        </a>
+                         @endif
                         </div>
                     </div>
 

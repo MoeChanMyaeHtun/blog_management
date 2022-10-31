@@ -19,8 +19,8 @@
                         </div>
                         <div class="col-md-6">
                             <div class="product p-4">
-                                <div class="mt-4 mb-3"> <span
-                                        class="text-uppercase text-muted brand">{{ $product->users?->name }}</span>
+                                <div class="mt-4 mb-3">
+                                    <a class="text-uppercase text-muted brand" href="{{ route('profiles',$product->user_id) }}">{{ $product->users?->name }}</a>
                                     <h5 class="text-uppercase">{{ $product->title }}</h5>
                                 </div>
                                 <p class="about">
