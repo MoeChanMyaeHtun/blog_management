@@ -7,7 +7,7 @@ return
     'Logout' => 'Logout',
     'Login' => 'Login',
     'Register' => 'Register',
-     'Category' =>  'Category',
+     'Categories' =>  'Categories',
      'Users'=>'Users',
      ]
 

@@ -71,7 +71,7 @@
                             <a href="{{ route('categories.index') }}" class="nav-link">
                                 <i class="fa-solid fa-tags nav-icon" style="font-size: 17px"></i>
                                 <p>
-                                    {{ __('nav.Category') }}
+                                    {{ __('nav.Categories') }}
                                 </p>
                             </a>
 
