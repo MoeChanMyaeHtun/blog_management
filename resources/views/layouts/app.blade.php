@@ -43,37 +43,46 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item " style="margin-right: 16px; padding-top:12px" >
+
+                            <select class="form-control changeLang">
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="mm" {{ session()->get('locale') == 'mm' ? 'selected' : '' }}>Myanmar</option>
+
+                            </select>
+
+                        </li>
                         <li class="nav-item mr-2 mt-2">
-                            <a href="{{ route('home') }}" class="nav-link">Home</a>
+                            <a href="{{ route('home') }}" class="nav-link">{{ __('nav.Home') }}</a>
                         </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item  mr-2 mt-2" >
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('nav.Login') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item  mr-2 mt-2">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('nav.Register') }}</a>
                                 </li>
                             @endif
                         @else
 
                         <li class="nav-item mr-2 mt-2">
-                            <a href="{{ route('product') }}" class="nav-link">Product</a>
+                            <a href="{{ route('product') }}" class="nav-link">{{ __('nav.Product') }}</a>
 
                         </li>
 
                                    <li class="nav-item  mr-2 mt-2">
-                            <a href="{{ route('profiles', Auth::id()) }}" class="nav-link">Profile</a>
+                            <a href="{{ route('profiles', Auth::id()) }}" class="nav-link">{{ __('nav.Profile') }}</a>
 
                         </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 
                                     <img src="{{ asset(Auth::user()->image?->path)}}" alt="image" style="width:40px; height:40px;  border-radius:50% ;">
-                    
+
                                     {{ Auth::user()->name }}
                                 </a>
 
@@ -81,7 +90,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('nav.Logout') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -108,6 +117,15 @@
         });
         @endif
       </script>
+      <script type="text/javascript">
+
+        var url = "{{ route('changeLang') }}";
+
+        $(".changeLang").change(function(){
+            window.location.href = url + "?lang="+ $(this).val();
+        });
+
+    </script>
       @stack('js')
 </body>
 </html>

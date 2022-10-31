@@ -55,14 +55,23 @@
                 <!-- SidebarSearch Form -->
 
                 <!-- Sidebar Menu -->
+
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
+                            <select class="form-control changeLang">
+                                <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
+                                <option value="mm" {{ session()->get('locale') == 'mm' ? 'selected' : '' }}>Myanmar</option>
+
+                            </select>
+
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link">
                                 <i class="fa-solid fa-tags nav-icon" style="font-size: 17px"></i>
                                 <p>
-                                    Category
+                                    {{ __('nav.Category') }}
                                 </p>
                             </a>
 
@@ -72,7 +81,7 @@
                             <a href="{{ route('products.index') }}" class="nav-link">
                                 <i class="fa-solid fa-box-open nav-icon" style="font-size: 17px"></i>
                                 <p>
-                                    Product
+                                    {{ __('nav.Product') }}
                                 </p>
                             </a>
                         </li>
@@ -80,8 +89,7 @@
                             <a href="{{ route('profile.index') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-users"></i>
                                 <p>
-                                    Users
-
+                                    {{ __('nav.Users') }}
                                 </p>
                             </a>
                         </li>
@@ -89,7 +97,7 @@
                             <a href="{{ route('logout') }}" class="nav-link">
                                 <i class="nav-icon fa-solid fa-right-from-bracket"></i>
                                 <p>
-                                    Logout
+                                    {{ __('nav.Logout') }}
                                 </p>
                             </a>
                         </li>
@@ -128,7 +136,15 @@
 
     <!-- jQuery -->
     <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script type="text/javascript">
 
+        var url = "{{ route('changeLang') }}";
+
+        $(".changeLang").change(function(){
+            window.location.href = url + "?lang="+ $(this).val();
+        });
+
+    </script>
 </body>
 
 </html>

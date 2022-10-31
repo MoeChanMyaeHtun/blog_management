@@ -2,14 +2,15 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LangController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\frontend\ProductController;
 use App\Http\Controllers\frontend\ProfilesController;
-use App\Http\Controllers\Admin\AdminAuthController;
 
 
 /*
@@ -33,6 +34,7 @@ Route::get('logout', [LoginController::class, 'logout']);
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/product/show/{product}',[ProductController::class, 'show'])->name('product.detail');
+Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
 
 Route::group(['middleware' => 'auth'], function () {
     //profile
@@ -57,6 +59,8 @@ Route::prefix('admin')->group(function ()
         Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
         Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
         Route::get('logout', [AdminAuthController::class, 'logout']);
+        Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
+
 
     Route::group(['middleware' => 'adminauth'], function ()
     {
