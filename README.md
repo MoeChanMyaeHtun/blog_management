@@ -5,7 +5,7 @@
 ## Installation
 
 ```
-git clone https://github.com/scm-ojt/laravel-batch-4-moechanmyaehtun.git
+git clone https://github.com/MoeChanMyaeHtun/blog_management.git
 
 
 ```
